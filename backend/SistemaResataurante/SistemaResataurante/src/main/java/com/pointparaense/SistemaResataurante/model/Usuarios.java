@@ -2,6 +2,7 @@ package com.pointparaense.SistemaResataurante.model;
 
 import jakarta.persistence.*;
 
+
 @Entity
 @Table(name = "usuarios")
 public class Usuarios {
@@ -14,6 +15,9 @@ public class Usuarios {
     private String senha;
     private String tipo;
 
+    public Usuarios(){
+
+    }
     public Usuarios(long id_usuario, String nome_usuario, String email, String senha, String tipo) {
         this.id_usuario = id_usuario;
         this.nome_usuario = nome_usuario;
@@ -22,16 +26,17 @@ public class Usuarios {
         this.tipo = tipo;
     }
 
-    public long id_usuario() {
+    public long getId_usuario() {
         return id_usuario;
     }
+
 
     public Usuarios setId_usuario(long id_usuario) {
         this.id_usuario = id_usuario;
         return this;
     }
 
-    public String nome_usuario() {
+    public String getNome_usuario() {
         return nome_usuario;
     }
 
@@ -40,7 +45,7 @@ public class Usuarios {
         return this;
     }
 
-    public String email() {
+    public String getEmail() {
         return email;
     }
 
@@ -49,7 +54,7 @@ public class Usuarios {
         return this;
     }
 
-    public String senha() {
+    public String getSenha() {
         return senha;
     }
 
@@ -58,7 +63,7 @@ public class Usuarios {
         return this;
     }
 
-    public String tipo() {
+    public String getTipo() {
         return tipo;
     }
 

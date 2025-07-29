@@ -21,6 +21,7 @@ public class UsuariosController {
 
     @GetMapping
     public List<Usuarios> mostrar_user() {
+        System.out.println("Buscando todos os usuários...");
         return usuarioService.mostrar_user();
     }
 

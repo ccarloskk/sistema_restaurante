@@ -16,8 +16,10 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    public List<Usuarios> mostrar_user(){
-        return usuarioRepository.findAll();
+    public List<Usuarios> mostrar_user() {
+        List<Usuarios> lista = usuarioRepository.findAll();
+        System.out.println("Total usuários encontrados: " + lista.size());
+        return lista;
     }
 
     public Usuarios salvar_user(Usuarios usuarios){
@@ -26,6 +28,5 @@ public class UsuarioService {
 
     public void excluir_user(Long id_usuario){
         usuarioRepository.deleteById(id_usuario);
-
     }
 }
