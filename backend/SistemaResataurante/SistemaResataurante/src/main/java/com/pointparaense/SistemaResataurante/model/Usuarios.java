@@ -18,6 +18,7 @@ public class Usuarios {
     public Usuarios(){
 
     }
+
     public Usuarios(long id_usuario, String nome_usuario, String email, String senha, String tipo) {
         this.id_usuario = id_usuario;
         this.nome_usuario = nome_usuario;
@@ -29,7 +30,6 @@ public class Usuarios {
     public long getId_usuario() {
         return id_usuario;
     }
-
 
     public Usuarios setId_usuario(long id_usuario) {
         this.id_usuario = id_usuario;
