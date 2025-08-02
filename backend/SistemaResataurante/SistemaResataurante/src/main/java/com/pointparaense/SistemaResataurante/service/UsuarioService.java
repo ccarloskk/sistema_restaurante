@@ -25,7 +25,7 @@ public class UsuarioService {
                 .orElseThrow(()-> new RuntimeException("usuário nao encontrado"));
     }
 
-    public Usuarios salvar_user(Usuarios usuarios){
+    public Usuarios criar_user(Usuarios usuarios){
         return usuarioRepository.save(usuarios);
     }
 
@@ -34,10 +34,10 @@ public class UsuarioService {
     }
 
     public Usuarios atualizar_user(Long id_usuarios, Usuarios atualizar_user){
-            Usuarios usuarios = buscar_user(id_usuarios);
-            usuarios.setNome_usuario(atualizar_user.getNome_usuario());
-            usuarios.setEmail(atualizar_user.getEmail());
-            usuarios.setSenha(atualizar_user.getSenha());
-            return usuarioRepository.save(usuarios);
+        Usuarios usuarios = buscar_user(id_usuarios);
+        usuarios.setNome_usuario(atualizar_user.getNome_usuario());
+        usuarios.setEmail(atualizar_user.getEmail());
+        usuarios.setSenha(atualizar_user.getSenha());
+        return usuarioRepository.save(usuarios);
     }
 }

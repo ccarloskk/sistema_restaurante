@@ -24,7 +24,7 @@ public class UsuariosController {
 
     @PostMapping
     public Usuarios criar_user(@RequestBody Usuarios usuarios){
-        return  usuarioService.salvar_user(usuarios);
+        return  usuarioService.criar_user(usuarios);
     }
 
     @PutMapping("/{id_usuario}")
