@@ -45,9 +45,9 @@ Sistema web desenvolvido para atender às necessidades do restaurante **Point Pa
 ## 🚀 Como Rodar o Projeto
 
 ### 1. Clonar o repositório
-  `git clone https://github.com/seu-usuario/point-paraense.git `
+  `git clone https://https://github.com/ccarloskk/sistema_restaurante `
   
-  `cd point-paraense `
+  `cd sistema_restaurante `
 
 ### 2. Backend
 - Configure o arquivo application.properties com os dados do seu banco de dados (local ou remoto).
