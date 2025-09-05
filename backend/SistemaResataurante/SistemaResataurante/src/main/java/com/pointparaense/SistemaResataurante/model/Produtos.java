@@ -2,6 +2,9 @@ package com.pointparaense.SistemaResataurante.model;
 
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Entity
 @Table(name= "produtos")
 public class Produtos {
@@ -9,17 +12,23 @@ public class Produtos {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_prod;
+
     private String nome_prod;
     private String descricao_prod;
-    private String preco_prod;
+
+    @Column(name = "preco_prod", nullable = false)
+    private BigDecimal preco_prod;
+
+    @OneToMany(mappedBy = "produtos")
+    private List<ItensComandas> itensComandas;
 
     public Produtos(){}
 
-    public Produtos(Long id_prod, String preco_prod, String nome_prod, String descricao_prod) {
+    public Produtos(Long id_prod, String nome_prod, String descricao_prod, BigDecimal preco_prod) {
         this.id_prod = id_prod;
-        this.preco_prod = preco_prod;
         this.nome_prod = nome_prod;
         this.descricao_prod = descricao_prod;
+        this.preco_prod = preco_prod;
     }
 
     public Long getId_prod() {
@@ -49,12 +58,21 @@ public class Produtos {
         return this;
     }
 
-    public String getPreco_prod() {
+    public BigDecimal getPreco_prod() {
         return preco_prod;
     }
 
-    public Produtos setPreco_prod(String preco_prod) {
+    public Produtos setPreco_prod(BigDecimal preco_prod) {
         this.preco_prod = preco_prod;
+        return this;
+    }
+
+    public List<ItensComandas> getItensComandas() {
+        return itensComandas;
+    }
+
+    public Produtos setItensComandas(List<ItensComandas> itensComandas) {
+        this.itensComandas = itensComandas;
         return this;
     }
 }

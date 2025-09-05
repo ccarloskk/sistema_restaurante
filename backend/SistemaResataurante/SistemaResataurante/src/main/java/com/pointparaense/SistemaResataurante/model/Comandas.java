@@ -1,8 +1,8 @@
 package com.pointparaense.SistemaResataurante.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -13,24 +13,27 @@ public class Comandas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_comanda;
+
     private String nome_cliente;
     private Date data;
     private String status;
-    private Long total;
 
-    @OneToMany(mappedBy = "comandas", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Column(name = "total")
+    private BigDecimal total;
+
+    @OneToMany(mappedBy = "comandas")
     private List<ItensComandas> itensComandas;
 
-    public Comandas(Long id_comanda, String nome_cliente, Date data, String status, Long total, List<ItensComandas> itensComandas) {
+
+    public Comandas() {}
+
+    public Comandas(Long id_comanda, String nome_cliente, Date data, String status, BigDecimal total, List<ItensComandas> itensComandas) {
         this.id_comanda = id_comanda;
         this.nome_cliente = nome_cliente;
         this.data = data;
         this.status = status;
         this.total = total;
         this.itensComandas = itensComandas;
-    }
-
-    public Comandas() {
     }
 
     public Long getId_comanda() {
@@ -69,11 +72,11 @@ public class Comandas {
         return this;
     }
 
-    public Long getTotal() {
+    public BigDecimal getTotal() {
         return total;
     }
 
-    public Comandas setTotal(Long total) {
+    public Comandas setTotal(BigDecimal total) {
         this.total = total;
         return this;
     }

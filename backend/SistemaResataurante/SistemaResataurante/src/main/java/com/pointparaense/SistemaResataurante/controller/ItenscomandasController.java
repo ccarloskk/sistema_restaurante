@@ -1,10 +1,8 @@
 package com.pointparaense.SistemaResataurante.controller;
 
 import com.pointparaense.SistemaResataurante.model.ItensComandas;
+import com.pointparaense.SistemaResataurante.model.ItensComandasDTO;
 import com.pointparaense.SistemaResataurante.service.ItenscomandasService;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +22,12 @@ public class ItenscomandasController {
         return itenscomandasService.listar_itensComandas();
     }
 
-    @PostMapping
+    @GetMapping("/detalhes")
+    public List<ItensComandasDTO> listarItensComDetalhes() {
+        return itenscomandasService.listarItensComDetalhes();
+    }
+
+    @PostMapping()
     public ItensComandas criar_itensComandas(@RequestBody ItensComandas itensComandas){
         return itenscomandasService.criar_itensComandas(itensComandas);
     }
@@ -35,7 +38,7 @@ public class ItenscomandasController {
     }
 
     @DeleteMapping("/{id_itens_comanda}")
-    public void excluir_itensComandas(@PathVariable Long id_itens_comanda){
+    public void excluir_itensComandas(@PathVariable ItensComandas id_itens_comanda){
         itenscomandasService.excluir_itensComandas(id_itens_comanda);
     }
 }

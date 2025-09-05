@@ -1,19 +1,47 @@
 package com.pointparaense.SistemaResataurante.service;
 
 import com.pointparaense.SistemaResataurante.model.Comandas;
+import com.pointparaense.SistemaResataurante.model.ItensComandas;
 import com.pointparaense.SistemaResataurante.model.Produtos;
 import com.pointparaense.SistemaResataurante.repository.ComandasRepository;
+import com.pointparaense.SistemaResataurante.repository.ProdutosRepository;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
 public class ComandasService {
 
     private ComandasRepository comandasRepository;
+    private ProdutosRepository produtosRepository;
 
-    public ComandasService(ComandasRepository comandasRepository) {
+    public ComandasService(ComandasRepository comandasRepository, ProdutosRepository produtosRepository) {
         this.comandasRepository = comandasRepository;
+        this.produtosRepository = produtosRepository;
+    }
+
+    public BigDecimal calculartotal(Comandas comandas) {
+        BigDecimal total = BigDecimal.ZERO;
+        if (comandas.getItensComandas() != null) {
+            for (ItensComandas item : comandas.getItensComandas()) {
+                Long idProduto = item.getProdutos().getId_prod();
+                Produtos produto = produtosRepository.findById(idProduto)
+                        .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + idProduto));
+
+                BigDecimal preco = produto.getPreco_prod();
+                total = total.add(preco.multiply(BigDecimal.valueOf(item.getQuantidade())));
+            }
+        }
+        comandas.setTotal(total);
+        comandasRepository.save(comandas);
+        return total;
+    }
+
+    public BigDecimal excluirtotal(Comandas comandas){
+        comandas.setTotal(BigDecimal.ZERO);
+        comandasRepository.save(comandas);
+        return BigDecimal.ZERO;
     }
 
     public List<Comandas> Listar_comandas(){
@@ -27,6 +55,7 @@ public class ComandasService {
     }
 
     public Comandas criar_comanda(Comandas comandas){
+        comandas.setTotal(calculartotal(comandas));
         return comandasRepository.save(comandas);
     }
 
@@ -39,8 +68,7 @@ public class ComandasService {
         comandas.setNome_cliente(atualizar_comanda.getNome_cliente());
         comandas.setData(atualizar_comanda.getData());
         comandas.setStatus(atualizar_comanda.getStatus());
-        comandas.setTotal(atualizar_comanda.getTotal());
+        comandas.setTotal(calculartotal(comandas));
         return comandasRepository.save(comandas);
     }
-
 }

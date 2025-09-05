@@ -2,6 +2,8 @@ package com.pointparaense.SistemaResataurante.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Itens_Comandas")
 public class ItensComandas {
@@ -21,15 +23,12 @@ public class ItensComandas {
     private int quantidade;
     private String observacoes;
 
-    public ItensComandas(Long id_itens_comanda, Comandas comandas, Produtos produtos, int quantidade, String observacoes) {
+    public ItensComandas() {}
+
+    public ItensComandas(Long id_itens_comanda, int quantidade, String observacoes) {
         this.id_itens_comanda = id_itens_comanda;
-        this.comandas = comandas;
-        this.produtos = produtos;
         this.quantidade = quantidade;
         this.observacoes = observacoes;
-    }
-
-    public ItensComandas() {
     }
 
     public Long getId_itens_comanda() {

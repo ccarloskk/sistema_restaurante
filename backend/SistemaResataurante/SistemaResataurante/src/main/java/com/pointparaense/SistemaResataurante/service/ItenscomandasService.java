@@ -2,7 +2,11 @@ package com.pointparaense.SistemaResataurante.service;
 
 import com.pointparaense.SistemaResataurante.model.Comandas;
 import com.pointparaense.SistemaResataurante.model.ItensComandas;
+import com.pointparaense.SistemaResataurante.model.ItensComandasDTO;
+import com.pointparaense.SistemaResataurante.model.Produtos;
+import com.pointparaense.SistemaResataurante.repository.ComandasRepository;
 import com.pointparaense.SistemaResataurante.repository.ItenscomandasRepository;
+import com.pointparaense.SistemaResataurante.repository.ProdutosRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +15,15 @@ import java.util.List;
 public class ItenscomandasService {
 
     private final ItenscomandasRepository itenscomandasRepository;
+    private  final ComandasService comandasService;
+    private  final ComandasRepository comandasRepository;
+    private final ProdutosRepository produtosRepository;
 
-    public ItenscomandasService(ItenscomandasRepository ItenscomandasRepository) {
-        this.itenscomandasRepository = ItenscomandasRepository;
+    public ItenscomandasService(ItenscomandasRepository itenscomandasRepository, ComandasService comandasService, ComandasRepository comandasRepository, ProdutosRepository produtosRepository) {
+        this.itenscomandasRepository = itenscomandasRepository;
+        this.comandasService = comandasService;
+        this.comandasRepository = comandasRepository;
+        this.produtosRepository = produtosRepository;
     }
 
     public List<ItensComandas> listar_itensComandas(){
@@ -27,19 +37,42 @@ public class ItenscomandasService {
     }
 
     public ItensComandas criar_itensComandas(ItensComandas itensComandas){
-        return itenscomandasRepository.save(itensComandas);
+        ItensComandas itemSalvo = itenscomandasRepository.save(itensComandas);
+
+        Comandas comanda = comandasRepository.findById(itemSalvo.getComandas().getId_comanda())
+                .orElseThrow(() -> new RuntimeException("Comanda não encontrada"));
+        Produtos produto = produtosRepository.findById(itemSalvo.getProdutos().getId_prod())
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+        itemSalvo.setComandas(comanda);
+        itemSalvo.setProdutos(produto);
+        comandasService.calculartotal(comanda);
+        return itemSalvo;
     }
 
-    public void excluir_itensComandas(Long id_itens_comanda){
-        itenscomandasRepository.deleteById(id_itens_comanda);
+    public ItensComandas  excluir_itensComandas(ItensComandas itensComandas){
+        ItensComandas itensexcluido = itenscomandasRepository.save(itensComandas);
+
+        Comandas comandas = itenscomandasRepository.findById(itensexcluido.getId_itens_comanda())
+                .orElseThrow(() -> new RuntimeException("Comanda nao encontrada")).getComandas();
+
+
+        itensexcluido.setComandas(comandas);
+        comandasService.excluirtotal(comandas);
+        return itensexcluido;
+    }
+
+    public List<ItensComandasDTO> listarItensComDetalhes() {
+        return itenscomandasRepository.buscarItensComDetalhes();
     }
 
     public ItensComandas atualizar_itenscomanda(Long id_itens_comanda, ItensComandas itensComandas){
         ItensComandas itensComandas1 = buscar_itensComandasdas(id_itens_comanda);
-        itensComandas1.setId_itens_comanda(itensComandas.getId_itens_comanda());
         itensComandas1.setProdutos(itensComandas.getProdutos());
+        itensComandas1.setQuantidade(itensComandas.getQuantidade());
         itensComandas1.setObservacoes(itensComandas.getObservacoes());
-        itensComandas1.setProdutos(itensComandas.getProdutos());
+        comandasService.calculartotal(itensComandas.getComandas());
+        comandasService.excluirtotal(itensComandas.getComandas());
         return itenscomandasRepository.save(itensComandas);
     }
 }
