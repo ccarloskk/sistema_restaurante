@@ -3,6 +3,7 @@ package com.pointparaense.SistemaResataurante.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 
 @Entity

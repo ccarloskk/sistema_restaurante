@@ -38,10 +38,22 @@ public class ComandasService {
         return total;
     }
 
-    public BigDecimal excluirtotal(Comandas comandas){
-        comandas.setTotal(BigDecimal.ZERO);
-        comandasRepository.save(comandas);
-        return BigDecimal.ZERO;
+    public BigDecimal excluirtotal(Comandas comandas) {
+        BigDecimal total = BigDecimal.ZERO;
+        if (comandas.getItensComandas() != null) {
+            for (ItensComandas item : comandas.getItensComandas()) {
+                Long idProduto = item.getProdutos().getId_prod();
+                Produtos produto = produtosRepository.findById(idProduto)
+                        .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + idProduto));
+
+                BigDecimal preco = produto.getPreco_prod();
+                BigDecimal subtotal = preco.multiply(BigDecimal.valueOf(item.getQuantidade()));
+                total = comandas.getTotal().subtract(subtotal);
+            }
+            comandas.setTotal(total);
+            comandasRepository.save(comandas);
+        }
+        return total;
     }
 
     public List<Comandas> Listar_comandas(){

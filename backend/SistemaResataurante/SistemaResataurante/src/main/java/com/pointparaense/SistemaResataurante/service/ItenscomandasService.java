@@ -56,7 +56,6 @@ public class ItenscomandasService {
         Comandas comandas = itenscomandasRepository.findById(itensexcluido.getId_itens_comanda())
                 .orElseThrow(() -> new RuntimeException("Comanda nao encontrada")).getComandas();
 
-
         itensexcluido.setComandas(comandas);
         comandasService.excluirtotal(comandas);
         return itensexcluido;
