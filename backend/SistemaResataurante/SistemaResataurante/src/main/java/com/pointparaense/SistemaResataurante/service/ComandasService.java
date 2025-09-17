@@ -21,7 +21,24 @@ public class ComandasService {
         this.produtosRepository = produtosRepository;
     }
 
-    public BigDecimal calculartotal(Comandas comandas) {
+//    public BigDecimal calculartotal(Comandas comandas) {
+//        BigDecimal total = BigDecimal.ZERO;
+//        if (comandas.getItensComandas() != null) {
+//            for (ItensComandas item : comandas.getItensComandas()) {
+//                Long idProduto = item.getProdutos().getId_prod();
+//                Produtos produto = produtosRepository.findById(idProduto)
+//                        .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + idProduto));
+//
+//                BigDecimal preco = produto.getPreco_prod();
+//                total = comandas.getTotal().add(preco.multiply(BigDecimal.valueOf(item.getQuantidade())));
+//            }
+//        }
+//        comandas.setTotal(total);
+//        comandasRepository.save(comandas);
+//        return total;
+//    }
+
+    public BigDecimal atualizar_valor(Comandas comandas) {
         BigDecimal total = BigDecimal.ZERO;
         if (comandas.getItensComandas() != null) {
             for (ItensComandas item : comandas.getItensComandas()) {
@@ -29,26 +46,10 @@ public class ComandasService {
                 Produtos produto = produtosRepository.findById(idProduto)
                         .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + idProduto));
 
-                BigDecimal preco = produto.getPreco_prod();
-                total = total.add(preco.multiply(BigDecimal.valueOf(item.getQuantidade())));
-            }
-        }
-        comandas.setTotal(total);
-        comandasRepository.save(comandas);
-        return total;
-    }
+                BigDecimal subtotal = produto.getPreco_prod().multiply(BigDecimal.valueOf(item.getQuantidade()));
+                total = total.add(subtotal);
 
-    public BigDecimal excluirtotal(Comandas comandas) {
-        BigDecimal total = BigDecimal.ZERO;
-        if (comandas.getItensComandas() != null) {
-            for (ItensComandas item : comandas.getItensComandas()) {
-                Long idProduto = item.getProdutos().getId_prod();
-                Produtos produto = produtosRepository.findById(idProduto)
-                        .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + idProduto));
 
-                BigDecimal preco = produto.getPreco_prod();
-                BigDecimal subtotal = preco.multiply(BigDecimal.valueOf(item.getQuantidade()));
-                total = comandas.getTotal().subtract(subtotal);
             }
             comandas.setTotal(total);
             comandasRepository.save(comandas);
@@ -67,7 +68,7 @@ public class ComandasService {
     }
 
     public Comandas criar_comanda(Comandas comandas){
-        comandas.setTotal(calculartotal(comandas));
+        comandas.setTotal(atualizar_valor(comandas));
         return comandasRepository.save(comandas);
     }
 
@@ -80,7 +81,7 @@ public class ComandasService {
         comandas.setNome_cliente(atualizar_comanda.getNome_cliente());
         comandas.setData(atualizar_comanda.getData());
         comandas.setStatus(atualizar_comanda.getStatus());
-        comandas.setTotal(calculartotal(comandas));
+        comandas.setTotal(atualizar_comanda.getTotal());
         return comandasRepository.save(comandas);
     }
 }

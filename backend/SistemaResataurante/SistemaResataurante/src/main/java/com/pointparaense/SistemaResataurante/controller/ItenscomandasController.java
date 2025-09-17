@@ -33,9 +33,10 @@ public class ItenscomandasController {
     }
 
     @PutMapping("/{id_itens_comanda}")
-    public ItensComandas atualizar_itenscomanda(@PathVariable Long id_itens_comanda, @RequestBody ItensComandas itensComandas){
+        public ItensComandas atualizar_itenscomanda(@PathVariable Long id_itens_comanda, @RequestBody ItensComandas itensComandas){
         return itenscomandasService.atualizar_itenscomanda(id_itens_comanda, itensComandas);
     }
+
 
     @DeleteMapping("/{id_itens_comanda}")
     public void excluir_itensComandas(@PathVariable ItensComandas id_itens_comanda){

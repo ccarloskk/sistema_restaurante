@@ -46,7 +46,7 @@ public class ItenscomandasService {
 
         itemSalvo.setComandas(comanda);
         itemSalvo.setProdutos(produto);
-        comandasService.calculartotal(comanda);
+        comandasService.atualizar_valor(comanda);
         return itemSalvo;
     }
 
@@ -56,8 +56,9 @@ public class ItenscomandasService {
         Comandas comandas = itenscomandasRepository.findById(itensexcluido.getId_itens_comanda())
                 .orElseThrow(() -> new RuntimeException("Comanda nao encontrada")).getComandas();
 
-        itensexcluido.setComandas(comandas);
-        comandasService.excluirtotal(comandas);
+        Comandas comanda = itensexcluido.getComandas();
+        comandasService.atualizar_valor(comanda);
+        itenscomandasRepository.delete(itensexcluido);
         return itensexcluido;
     }
 
@@ -70,8 +71,8 @@ public class ItenscomandasService {
         itensComandas1.setProdutos(itensComandas.getProdutos());
         itensComandas1.setQuantidade(itensComandas.getQuantidade());
         itensComandas1.setObservacoes(itensComandas.getObservacoes());
-        comandasService.calculartotal(itensComandas.getComandas());
-        comandasService.excluirtotal(itensComandas.getComandas());
-        return itenscomandasRepository.save(itensComandas);
+        ItensComandas itemAtualizado = itenscomandasRepository.save(itensComandas1);
+        comandasService.atualizar_valor(itemAtualizado.getComandas());
+        return itemAtualizado;
     }
 }
