@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+  overflow: hidden;
+
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+header {
+  background-color: #b22222;
+  color: white;
+  padding: 1em 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+}
+
+.main-nav ul {
+  display: flex;
+  gap: 1.5em;
+}
+
+.main-nav li a {
+  font-weight: 700;
+  transition: color 0.3s ease;
+}
+
+.main-nav li a:hover,
+.main-nav li a.active {
+  color: #ffe4e1;
+}
+
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.about-section {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  margin: 3em auto;
+  padding: 2.5em 1.5em;
+}
+
+.about-section h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #b22222;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.about-section p {
+  font-size: 1.05rem;
+  color: #444;
+  line-height: 1.6;
+  margin-bottom: 1em;
+  text-align: justify;
+}
+
+@media (max-width: 768px) {
+  .about-section {
+    margin: 2em 0;
+    padding: 2em 1em;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+  .main-nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #b22222;
+    width: 100%;
+    display: none;
+    text-align: center;
+  }
+  .main-nav ul {
+    flex-direction: column;
+    gap: 1em;
+    padding: 1em 0;
+  }
+  .main-nav ul.active {
+    display: flex;
+  }
+  .main-nav.active {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section h2 {
+    font-size: 1.6rem;
+  }
+  .about-section p {
+    font-size: 1rem;
+  }
+}

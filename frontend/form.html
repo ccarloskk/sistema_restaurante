@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardápio Digital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/form.css">
+    <style>
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">Cardápio Digital</div>
+            <button class="mobile-toggle">☰</button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
+                    <li><a href="form.html "class="active">Cardapio</a></li>
+                    <li><a href="about.html" class="active" >Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="form-section">
+                <h2>Nosso Cardápio</h2>
+                <form id="pedidoForm">
+                    <div class="produtos-grid">
+                        <div class="produto-item">
+                            <h3 class="nome-produto" data-id=""></h3>
+                            <p class="preco">R$</p>
+                            <div class="quantidade-controle">
+                                <input type="number" min="0" value="0" class="quantidade" data-id="">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="resumo-pedido">
+                        <h3>Seu Pedido</h3>
+                        <div id="itensSelecionados"></div>
+                        <p class="total">Total: R$ <span id="totalPedido">0,00</span></p>
+                    </div>
+                    
+                    <div class="dados-cliente">
+                        <h3>Seus Dados</h3>
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" required>
+                        
+                        <label for="telefone">Telefone:</label>
+                        <input type="tel" id="telefone" name="telefone" required>
+                    </div>
+                    
+                    <input type="submit" value="Finalizar Pedido">
+                </form>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div class="container">
+            <p>©2025 Point Paraense. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

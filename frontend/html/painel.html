@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo</title>
+    <link rel="stylesheet" href="../css/painel.css">
+</head>
+<body>
+<div class="admin-header">
+    <h1>Painel Administrativo - Point Paraense</h1>
+    <a href="">Sair</a>
+</div>
+
+<div class="admin-container">
+    <div class="admin-sidebar">
+        <h3>Menu</h3>
+        <ul>
+            <li><a href="#pedidos">Visualizar Pedidos</a></li>
+            <li><a href="adicionar_produto.html">Adicionar Produto</a></li>
+        </ul>
+    </div>
+    <div class="admin-content">
+        <section id="produtos">
+            <h2>Produtos do Cardápio</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn btn-edit">Editar</a>
+                            <a href="#" class="btn btn-delete" onclick="return confirm('Tem certeza?')">Excluir</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <a href="#" class="btn btn-edit">Editar</a>
+                            <a href="#" class="btn btn-delete" onclick="return confirm('Tem certeza?')">Excluir</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="pedidos">
+            <h2>Últimos Pedidos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Telefone</th>
+                        <th>Total</th>
+                        <th>Data</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                            <strong></strong><br>
+                            <ul>
+                                <li></li>
+                                <li></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</div>
+</body>
+</html>
