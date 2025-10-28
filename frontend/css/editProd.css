@@ -1,3 +1,16 @@
+
+:root {
+    --color-primary: #b22222;         
+    --color-primary-light: #ffe4e1;   
+    --color-background: #f9f9f9;      
+    --color-surface: #ffffff;         
+    --color-text: #333333;            
+    --color-text-light: #555555;      
+    --color-highlight-bg: #fff0f0;   
+    --color-shadow: rgba(0, 0, 0, 0.1);
+    --color-shadow-strong: rgba(178, 34, 34, 0.15);
+  }
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: #f5f5f5;
