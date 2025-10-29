@@ -173,6 +173,9 @@ ul {
 }
 
 @media (max-width: 480px) {
+  body{
+    overflow: auto;
+  }
   .logo{
     font-size: 40px;
   }
@@ -182,11 +185,6 @@ ul {
   }
   .hero-text h2 {
     font-size: 35px;
-    overflow: hidden;
-  }
-
-  .hero-text p {
-    font-size: 20px;
   }
 
   .about-section {

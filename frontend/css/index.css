@@ -81,13 +81,8 @@ ul {
   color: #ffe4e1;
 }
 
-main {
-  background-color: var(--color-background);
-  padding: 50px;
-}
-
 .hero {
-  padding: 60px 20px;
+  padding: 110px;
 }
 
 .hero-content {

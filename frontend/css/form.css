@@ -292,6 +292,9 @@ footer {
 }
 
 @media (max-width: 480px) {
+  body{
+    overflow: auto;
+  }
   .logo{
     font-size: 40px;
   }
