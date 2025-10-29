@@ -154,7 +154,6 @@ ul {
     margin-top: 5px;
   }
 
-  /* Seção Sobre */
   .about-section {
     max-width: 95%;
     padding: 30px 15px;
@@ -174,8 +173,20 @@ ul {
 }
 
 @media (max-width: 480px) {
-  .logo {
-    font-size: 1.3rem;
+  .logo{
+    font-size: 40px;
+  }
+  .header-content{
+    font-size: 22px;
+    height: 185px;
+  }
+  .hero-text h2 {
+    font-size: 35px;
+    overflow: hidden;
+  }
+
+  .hero-text p {
+    font-size: 20px;
   }
 
   .about-section {

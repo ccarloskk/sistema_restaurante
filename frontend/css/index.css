@@ -22,7 +22,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
-  overflow: auto;
+  overflow: hidden;
 }
 
 header {
@@ -219,6 +219,9 @@ footer {
 }
 
 @media (max-width: 1024px) {
+  body{
+    overflow: auto;
+  }
   .hero-content {
     flex-direction: column-reverse;
     text-align: center;
@@ -259,6 +262,9 @@ footer {
 }
 
 @media (max-width: 768px) {
+  body{
+    overflow: auto;
+  }
   header .header-content {
     flex-direction: column;
     align-items: flex-start;
@@ -290,16 +296,25 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .logo{
+    font-size: 40px;
+  }
+  .header-content{
+    font-size: 22px;
+    height: 185px;
+  }
   .hero-text h2 {
-    font-size: 1.5rem;
+    font-size: 35px;
+    overflow: hidden;
   }
 
   .hero-text p {
-    font-size: 0.9rem;
+    font-size: 20px;
   }
 
   .cards {
     gap: 15px;
+    font-size: 20px;
   }
 
   .card img {
@@ -307,7 +322,7 @@ footer {
   }
 
   .footer-info p {
-    font-size: 0.85rem;
+    font-size: 15px;
   }
 
   .social-icons a img {
