@@ -14,8 +14,8 @@ public interface OrderItemsRepository extends JpaRepository<OrderItems, Long> {
     @Query("""
     SELECT new com.manager_restaurant.restaurant_manager.dto.ItensComandasDTO(
         oi.id_order_item,
-        o.customer_name,
-        p.product_name,
+        o.name_customer,
+        p.name_product,
         oi.quantity,
         oi.notes
     )

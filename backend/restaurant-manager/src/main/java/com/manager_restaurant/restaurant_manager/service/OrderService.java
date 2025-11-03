@@ -30,7 +30,7 @@ public class OrderService {
                 Products product = productsRepository.findById(id_product)
                         .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + id_product));
 
-                BigDecimal subtotal = product.getProduct_price().multiply(BigDecimal.valueOf(item.getQuantity()));
+                BigDecimal subtotal = product.getPrice_product().multiply(BigDecimal.valueOf(item.getQuantity()));
                 total = total.add(subtotal);
             }
             order.setTotal(total);
@@ -59,7 +59,7 @@ public class OrderService {
 
     public Order updateOrder(Long id_order, Order updatedOrder) {
         Order order = searchOrder(id_order);
-        order.setCustomer_name(updatedOrder.getCustomer_name());
+        order.setCustomer_name(updatedOrder.getName_customer());
         order.setDate_order(updatedOrder.getDate_order());
         order.setStatus(updatedOrder.getStatus());
         order.setTotal(updatedOrder.getTotal());

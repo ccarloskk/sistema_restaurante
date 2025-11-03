@@ -13,22 +13,22 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_product;
 
-    private String product_name;
-    private String product_description;
+    private String name_product;
+    private String description_product;
 
-    @Column(name = "product_price", nullable = false)
-    private BigDecimal product_price;
+    @Column(name = "price_product", nullable = false)
+    private BigDecimal price_product;
 
     @OneToMany(mappedBy = "product")
     private List<OrderItems> OrderItems;
 
     public Products(){}
 
-    public Products(Long id_product, String product_name, String product_description, BigDecimal product_price) {
+    public Products(Long id_product, String name_product, String description_product, BigDecimal price_product) {
         this.id_product = id_product;
-        this.product_name = product_name;
-        this.product_description = product_description;
-        this.product_price = product_price;
+        this.name_product = name_product;
+        this.description_product = description_product;
+        this.price_product = price_product;
     }
 
     public Long getId_product() {
@@ -40,30 +40,30 @@ public class Products {
         return this;
     }
 
-    public String getProduct_description() {
-        return product_description;
+    public String getName_product() {
+        return name_product;
     }
 
-    public Products setProduct_description(String product_description) {
-        this.product_description = product_description;
+    public Products setName_product(String name_product) {
+        this.name_product = name_product;
         return this;
     }
 
-    public String getProduct_name() {
-        return product_name;
+    public String getDescription_product() {
+        return description_product;
     }
 
-    public Products setProduct_name(String product_name) {
-        this.product_name = product_name;
+    public Products setDescription_product(String description_product) {
+        this.description_product = description_product;
         return this;
     }
 
-    public BigDecimal getProduct_price() {
-        return product_price;
+    public BigDecimal getPrice_product() {
+        return price_product;
     }
 
-    public Products setProduct_price(BigDecimal product_price) {
-        this.product_price = product_price;
+    public Products setPrice_product(BigDecimal price_product) {
+        this.price_product = price_product;
         return this;
     }
 

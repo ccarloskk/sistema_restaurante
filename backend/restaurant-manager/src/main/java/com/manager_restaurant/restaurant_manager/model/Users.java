@@ -14,7 +14,7 @@ public class Users implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id_user;
+    private Long  id_user;
 
     @Column(nullable = false)
     private String user_name;
@@ -46,11 +46,11 @@ public class Users implements UserDetails {
             return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
-    public String getId_user() {
+    public Long getId_user() {
         return id_user;
     }
 
-    public Users setId_user(String id_user) {
+    public Users setId_user(Long id_user) {
         this.id_user = id_user;
         return this;
     }

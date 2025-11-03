@@ -13,7 +13,7 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_order;
 
-    private String customer_name;
+    private String name_customer;
     private Date date_order;
     private String status;
 
@@ -26,9 +26,9 @@ public class Order {
 
     public Order() {}
 
-    public Order(Long id_order, String customer_name, Date date_order, String status, BigDecimal total, List<OrderItems> OrderItems) {
+    public Order(Long id_order, String name_customer, Date date_order, String status, BigDecimal total, List<OrderItems> OrderItems) {
         this.id_order = id_order;
-        this.customer_name = customer_name;
+        this.name_customer = name_customer;
         this.date_order = date_order;
         this.status = status;
         this.total = total;
@@ -44,12 +44,12 @@ public class Order {
         return this;
     }
 
-    public String getCustomer_name() {
-        return customer_name;
+    public String getName_customer() {
+        return name_customer;
     }
 
     public Order setCustomer_name(String customer_name) {
-        this.customer_name = customer_name;
+        this.name_customer = customer_name;
         return this;
     }
 

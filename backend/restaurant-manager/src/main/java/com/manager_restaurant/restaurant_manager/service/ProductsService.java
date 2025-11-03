@@ -35,9 +35,9 @@ public class ProductsService {
 
     public Products updateProduct(Long id_product, Products updatedProduct) {
         Products product = searchProduct(id_product);
-        product.setProduct_name(updatedProduct.getProduct_name());
-        product.setProduct_price(updatedProduct.getProduct_price());
-        product.setProduct_description(updatedProduct.getProduct_description());
+        product.setName_product(updatedProduct.getName_product());
+        product.setPrice_product(updatedProduct.getPrice_product());
+        product.setDescription_product(updatedProduct.getDescription_product());
         return productsRepository.save(product);
     }
 }

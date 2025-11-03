@@ -22,7 +22,7 @@ public class UserService{
         return userRepository.findAll();
     }
 
-    public Users searchUser(String id_user) {
+    public Users searchUser(Long id_user) {
         return userRepository.findById(Long.valueOf(id_user))
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
     }
@@ -35,7 +35,7 @@ public class UserService{
         userRepository.deleteById(Long.valueOf(id_user));
     }
 
-    public Users updateUser(String id_user , Users updatedUser) {
+    public Users updateUser(Long id_user , Users updatedUser) {
         Users existingUser = searchUser(id_user);
         existingUser.setUser_name(updatedUser.getUser_name());
         existingUser.setEmail(updatedUser.getEmail());
