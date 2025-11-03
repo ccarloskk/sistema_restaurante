@@ -105,32 +105,34 @@ main form {
   gap: 25px;
 }
 
-main .produtos-grid {
+main .products-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 20px;
 }
 
-main .produto-item {
+main .products-item {
   background-color: var(--color-primary-light);
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
 }
-
-main .nome-produto {
+.describe{
+  font-size: 16px;
+}
+main .name-products {
   color: var(--color-primary);
-  font-size: 18px;
+  font-size: 20px;
   margin-bottom: 8px;
 }
 
-main .preco {
+main .price {
   color: var(--color-text-light);
   font-size: 16px;
   margin-bottom: 10px;
 }
 
-main .quantidade-controle input {
+main .quantity-controller input {
   width: 80px;
   padding: 5px;
   border-radius: 6px;
@@ -139,13 +141,13 @@ main .quantidade-controle input {
   font-size: 16px;
 }
 
-main .resumo-pedido {
+main .order-summary {
   background-color: var(--color-highlight-bg);
   border-radius: 10px;
   padding: 20px;
 }
 
-main .resumo-pedido h3 {
+main .order-summary h3 {
   color: var(--color-primary);
   margin-bottom: 10px;
 }
@@ -200,7 +202,7 @@ main input[type="submit"]:hover {
 footer {
   background-color: #b22222; 
   color: #fff;
-  padding: block;
+  padding: 10px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -220,7 +222,7 @@ footer {
 }
 
 .social-icons a {
-  display: inline-block;
+  display: auto;
   margin-left: 15px;
   transition: transform 0.3s;
 }
