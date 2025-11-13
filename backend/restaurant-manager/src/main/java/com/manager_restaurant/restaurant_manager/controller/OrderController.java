@@ -1,15 +1,30 @@
 package com.manager_restaurant.restaurant_manager.controller;
 
+import com.manager_restaurant.restaurant_manager.dto.ItemsSumDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
+import com.manager_restaurant.restaurant_manager.model.OrderItems;
+import com.manager_restaurant.restaurant_manager.model.Products;
+import com.manager_restaurant.restaurant_manager.repository.OrderItemsRepository;
+import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import com.manager_restaurant.restaurant_manager.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
+
+    @Autowired
     private final OrderService orderService;
+
+    @Autowired
+    private OrderItemsRepository orderItemsRepository;
+
+    @Autowired
+    private ProductsRepository productsRepository;
 
     public OrderController(OrderService orderService) {
         this.orderService = orderService;
@@ -18,6 +33,11 @@ public class OrderController {
     @GetMapping
     public List<Order> listOrders(){
         return orderService.listOrders();
+    }
+
+    @PostMapping("/updateTotalPublic")
+    public BigDecimal updateTotal(@RequestBody List<OrderItems> totalPublicList){
+        return orderService.updateTotalPublic(totalPublicList);
     }
 
     @PostMapping

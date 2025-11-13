@@ -2,12 +2,15 @@ package com.manager_restaurant.restaurant_manager.service;
 
 
 
+import com.manager_restaurant.restaurant_manager.dto.ItemsSumDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.CommandRepository;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -37,6 +40,19 @@ public class OrderService {
             commandRepository.save(order);
         }
         return total;
+    }
+
+    public BigDecimal updateTotalPublic(List<OrderItems> totalPublicList) {
+        BigDecimal totalPublic = BigDecimal.ZERO;
+        for (OrderItems item : totalPublicList) {
+            Long id_product = item.getProduct().getId_product();
+            Products product = productsRepository.findById(id_product)
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + id_product));
+
+            BigDecimal subtotal = product.getPrice_product().multiply(BigDecimal.valueOf(item.getQuantity()));
+            totalPublic = totalPublic.add(subtotal);
+        }
+        return totalPublic;
     }
 
     public List<Order> listOrders() {

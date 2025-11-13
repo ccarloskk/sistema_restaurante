@@ -37,8 +37,20 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/auth/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/auth/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMIN")
+
+                        .requestMatchers(HttpMethod.GET, "/products/id_product").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/products/id_product").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
+
+                        .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/orders/**").permitAll()
+//                        .requestMatchers(HttpMethod.PUT, "/orders/**").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.DELETE, "/orders/").hasRole("ADMIN")
+
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
@@ -47,14 +59,19 @@ public class SecurityConfiguration {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOriginPatterns(List.of("*"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost:5173",
+                "http://localhost:5500",
+                "http://127.0.0.1:5500"
+        ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
-
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception {
         return configuration.getAuthenticationManager();
