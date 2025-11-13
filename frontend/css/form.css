@@ -22,7 +22,7 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   line-height: 1.6;
-  overflow: hidden;
+  overflow: auto;
 }
 
 header {
@@ -132,13 +132,30 @@ main .price {
   margin-bottom: 10px;
 }
 
-main .quantity-controller input {
-  width: 80px;
-  padding: 5px;
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.decrease{
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 6px 10px;
   border-radius: 6px;
-  border: 1px solid var(--color-primary);
-  text-align: center;
-  font-size: 16px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.increase{
+  background-color: var(--color-primary);
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
 }
 
 main .order-summary {

@@ -30,24 +30,26 @@
                 <h3 class="name-products" data-id=""></h3>
                 <p class="describe"></p>
                 <p class="price">R$</p>
-                <div class="quantity-controller"> 
+                <div class="quantity-control">
+                  <button type="button" class="decrease">-</button>
+                  <span class="quantity">0</span>
+                  <button type="button" class="increase">+</button>
                 </div>
               </div>
             </div>
             <div class="order-summary">
               <h3>Seu Pedido</h3>
               <div id="itensSelecionados"></div>
-              <p class="total">Total: R$ <span id="totalOrder">0,00</span></p>
-            </div>
+              <p class="total" id="total">Total: R$ <span id="totalOrder"></span></p>
+            </div>            
             <div class="dados-cliente">
               <h3>Seus Dados</h3>
               <label for="nome">Nome:</label>
               <input type="text" id="nome" name="nome" required />
-
               <label for="telefone">Telefone:</label>
               <input type="tel" id="telefone" name="telefone" required />
             </div>
-            <input type="submit" value="Finalizar Pedido" />
+            <input id="sendButton" type="submit" value="Finalizar Pedido" />
           </form>
         </div>
       </div>
