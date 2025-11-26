@@ -13,9 +13,4 @@ async function loginUser(event){
 }
 
 function logoutUser(event){
-
-}
-
-function registerUser(event){
-
 }

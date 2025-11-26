@@ -1,9 +1,7 @@
 package com.manager_restaurant.restaurant_manager.controller;
 
-import com.manager_restaurant.restaurant_manager.dto.ItemsSumDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
-import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.OrderItemsRepository;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import com.manager_restaurant.restaurant_manager.service.OrderService;
@@ -15,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/orders")
+@CrossOrigin(origins = "*")
 public class OrderController {
 
     @Autowired

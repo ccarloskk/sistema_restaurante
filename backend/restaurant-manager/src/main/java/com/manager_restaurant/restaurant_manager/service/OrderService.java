@@ -2,14 +2,12 @@ package com.manager_restaurant.restaurant_manager.service;
 
 
 
-import com.manager_restaurant.restaurant_manager.dto.ItemsSumDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.CommandRepository;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.math.BigDecimal;
 import java.util.List;

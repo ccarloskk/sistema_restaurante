@@ -41,15 +41,14 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/auth/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMIN")
 
-                        .requestMatchers(HttpMethod.GET, "/products/id_product").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/products/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/products/id_product").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/products/id_product").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/orders/**").permitAll()
-//                        .requestMatchers(HttpMethod.PUT, "/orders/**").hasRole("ADMIN")
-//                        .requestMatchers(HttpMethod.DELETE, "/orders/").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/orders/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/orders/").hasRole("ADMIN")
 
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
@@ -61,7 +60,7 @@ public class SecurityConfiguration {
         config.setAllowedOriginPatterns(List.of("*"));
         config.setAllowedOrigins(List.of(
                 "http://localhost:5173",
-                "http://localhost:5500",
+                "http://localhost:8080",
                 "http://127.0.0.1:5500"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));

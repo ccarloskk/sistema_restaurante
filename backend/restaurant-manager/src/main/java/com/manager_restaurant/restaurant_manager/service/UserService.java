@@ -3,8 +3,6 @@ package com.manager_restaurant.restaurant_manager.service;
 
 import com.manager_restaurant.restaurant_manager.model.Users;
 import com.manager_restaurant.restaurant_manager.repository.UserRepository;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
