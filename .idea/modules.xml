@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/.idea/backend.iml" filepath="$PROJECT_DIR$/.idea/backend.iml" />
       <module fileurl="file://$PROJECT_DIR$/restaurant-manager/restaurant-manager.iml" filepath="$PROJECT_DIR$/restaurant-manager/restaurant-manager.iml" />
+=======
+      <module fileurl="file://$PROJECT_DIR$/.idea/sistema-restaurante.iml" filepath="$PROJECT_DIR$/.idea/sistema-restaurante.iml" />
+>>>>>>> e14afc73f87b783311778c7eaf71e0a6384fc000
     </modules>
   </component>
 </project>

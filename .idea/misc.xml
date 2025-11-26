@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+<<<<<<< HEAD
+=======
+  <component name="EditMigrationStateService">
+    <option name="migrationStatus" value="COMPLETED" />
+  </component>
+>>>>>>> e14afc73f87b783311778c7eaf71e0a6384fc000
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/restaurant-manager/pom.xml" />
       </list>
     </option>
   </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+=======
+        <option value="$PROJECT_DIR$/backend/restaurant-manager/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_X" default="true" project-jdk-name="openjdk-24" project-jdk-type="JavaSDK">
+>>>>>>> e14afc73f87b783311778c7eaf71e0a6384fc000
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
