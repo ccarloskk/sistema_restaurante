@@ -44,17 +44,16 @@ public class ProductsController {
         return productsService.createProduct(product);
     }
 
-    @PutMapping("/{id_product}")
+    @PutMapping("/{idProduct}")
     public ProductsDTO updateProduct(@PathVariable Long idProduct, @RequestBody ProductsDTO  product){
         Products toUpdate = productsMapper.toEntity(product);
         Products updated = productsService.updateProduct(idProduct, toUpdate);
         return productsMapper.toResponseDTO(updated);
     }
 
-    @PatchMapping("/{id_product}/destatus")
+    @PatchMapping("/{idProduct}/destatus")
     public ResponseEntity<Void> destatusProduct(@PathVariable Long idProduct) {
         productsService.destatusProduct(idProduct);
         return ResponseEntity.noContent().build();
     }
-
 }

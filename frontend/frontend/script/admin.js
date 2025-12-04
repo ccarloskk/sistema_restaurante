@@ -9,21 +9,8 @@ async function getCardapioAdmin() {
     container.innerHTML = "";
 
     products.forEach((product) => {
-      if (product.idProduct == null) {
+      if (product.id_product == null) {
         return;
-      }
-
-      let statusText;
-      let statusClass;
-
-      if (product.status == 0) {
-        statusText = 'Desativado';
-        statusClass = 'unavailable';;
-      } else if (product.status == 1) {
-        statusText = 'Ativado';
-        statusClass = 'available';
-      } else {
-        statusText = 'Desconhecido';
       }
 
       const item = document.createElement("tr");
@@ -39,9 +26,11 @@ async function getCardapioAdmin() {
         </td>
         <td id="dishCategory">${product.category_products}</td>
         <td id="price">R$ ${product.price_product}</td>
-        <td id= "status"><span class="status-pill ${statusClass}">${statusText}</span></td>
+        <td id= "status">${product.status}<span class="status-pill available"></span></td>
         <td>
-          <button type="button" class="btn icon" aria-label="Editar" onclick="window.location.href='/frontend/page/editProd.html'">✏️</button>        
+          <button type="button" class="btn icon" aria-label="Editar">✏️</button>
+          <button type="button" class="btn icon" aria-label="Destacar">⭐</button>
+          <button type="button" class="btn icon danger" aria-label="Excluir">🗑️</button>
         </td>
       `;
       
@@ -52,7 +41,5 @@ async function getCardapioAdmin() {
     console.error("Erro ao carregar cardápio:", erro);
   }
 }
-async function addProd() {
-  
-}
+
 getCardapioAdmin();

@@ -41,7 +41,7 @@ public class OrderItemsService {
 
         Order order = commandRepository.findById(savedItem.getOrder().getId_order())
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
-        Products product = productsRepository.findById(savedItem.getProduct().getId_product())
+        Products product = productsRepository.findById(savedItem.getProduct().getIdProduct())
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
 
         savedItem.setOrder(order);

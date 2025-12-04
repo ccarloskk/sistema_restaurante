@@ -27,7 +27,7 @@ public class OrderService {
         BigDecimal total = BigDecimal.ZERO;
         if (order.getOrder_items() != null) {
             for (OrderItems item : order.getOrder_items()) {
-                Long id_product = item.getProduct().getId_product();
+                Long id_product = item.getProduct().getIdProduct();
                 Products product = productsRepository.findById(id_product)
                         .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + id_product));
 
@@ -43,7 +43,7 @@ public class OrderService {
     public BigDecimal updateTotalPublic(List<OrderItems> totalPublicList) {
         BigDecimal totalPublic = BigDecimal.ZERO;
         for (OrderItems item : totalPublicList) {
-            Long id_product = item.getProduct().getId_product();
+            Long id_product = item.getProduct().getIdProduct();
             Products product = productsRepository.findById(id_product)
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + id_product));
 

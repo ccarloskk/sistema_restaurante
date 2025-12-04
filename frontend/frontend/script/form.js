@@ -6,15 +6,16 @@ async function getCardapio() {
   try {
     const response = await fetch(cardapioURL);
     const products = await response.json();
+
     const container = document.querySelector(".products-grid");
     container.innerHTML = "";
 
     products.forEach((product) => {
-      if (product.idProduct == null) {
+      if (product.id_product == null) {
         return;
       }
 
-      quantities[product.idProduct] = quantities[product.idProduct] ?? 0;
+      quantities[product.id_product] = quantities[product.id_product] ?? 0;
 
       const item = document.createElement("div");
       item.classList.add("products-item");
@@ -38,7 +39,7 @@ async function getCardapio() {
       increaseButton.addEventListener("click", () => {
         localQty += 1;
         quantitySpan.textContent = localQty;
-        quantities[product.idProduct] = localQty;
+        quantities[product.id_product] = localQty;
         updateSumTotal();
       });
 
@@ -46,7 +47,7 @@ async function getCardapio() {
         if (localQty > 0) {
           localQty -= 1;
           quantitySpan.textContent = localQty;
-          quantities[product.idProduct] = localQty;
+          quantities[product.id_product] = localQty;
           updateSumTotal();
         }
       });
@@ -77,7 +78,7 @@ async function updateSumTotal() {
       .filter(([, qty]) => qty > 0)
       .map(([id, qty]) => ({
         quantity: qty,
-        product: { idProduct: Number(id) },
+        product: { id_product: Number(id) },
       }));
 
     console.debug("Payload (body) construído:", body);
@@ -109,22 +110,8 @@ async function updateSumTotal() {
     const total =
       typeof sum === "number" ? sum : sum.total ?? sum.totalPublic ?? 0;
     totalEl.textContent = formatBRLNumber(total);
-    
   } catch (err) {
     console.error("Erro em updateSumTotal:", err);
   }
 }
-
-// async function MessageWhats(){
-
-
-//     message += `*Dados do cliente:*\n`;
-//     message += `Nome: ${customerName}\n`;
-//     message += `Telefone: ${phone}\n`;
-
-//     message += `*Itens do pedido:*\n`;
-
-//     message += `${quantities}`
-//     message += `${total}`
-// }
-getCardapio()
+getCardapio();

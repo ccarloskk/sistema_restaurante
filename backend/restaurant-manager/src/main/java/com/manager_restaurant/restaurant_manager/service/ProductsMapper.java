@@ -3,6 +3,7 @@ package com.manager_restaurant.restaurant_manager.service;
 import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import org.springframework.stereotype.Component;
+import java.math.BigDecimal;
 
 @Component
 public class ProductsMapper {
@@ -14,6 +15,11 @@ public class ProductsMapper {
         entity.setDescription_product(dto.getDescriptionProduct());
         entity.setCategory_products(dto.getCategoryProducts());
 
+        if (dto.getPriceProduct() != null) {
+            entity.setPrice_product(new BigDecimal(dto.getPriceProduct()));
+        }
+        entity.setStatus(dto.getStatusProduct());
+
         return entity;
     }
 
@@ -23,6 +29,7 @@ public class ProductsMapper {
         dto.setNameProduct(entity.getName_product());
         dto.setDescriptionProduct(entity.getDescription_product());
         dto.setCategoryProducts(entity.getCategory_products());
+        dto.setStatusProduct(entity.getStatus());
 
         if (entity.getPrice_product() != null) {
             dto.setPriceProduct(entity.getPrice_product().toPlainString());
