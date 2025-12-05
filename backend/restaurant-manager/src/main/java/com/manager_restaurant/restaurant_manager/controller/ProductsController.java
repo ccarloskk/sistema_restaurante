@@ -6,7 +6,6 @@ import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import com.manager_restaurant.restaurant_manager.service.ProductsMapper;
 import com.manager_restaurant.restaurant_manager.service.ProductsService;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +38,7 @@ public class ProductsController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Products createProduct(@RequestBody Products product){
         return productsService.createProduct(product);
     }
