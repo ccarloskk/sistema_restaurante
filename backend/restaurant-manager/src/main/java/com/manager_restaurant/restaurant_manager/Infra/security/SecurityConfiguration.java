@@ -42,8 +42,9 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/products/menu").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/products/{idProduct}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/products/{idProduct}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/products/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()

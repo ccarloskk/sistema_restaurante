@@ -76,6 +76,7 @@
 
                 <div class="actions field-span">
                     <button type="toSend" class="btn primary">Salvar produto</button>
+                    <button type="button" class="btn ghost"  onclick="window.location.href='/page/admin.html'">Cancelar</button>
                     <button type="button" class="btn ghost"  onclick="window.location.href='/frontend/page/admin.html'">Cancelar</button>
                 </div>
             </form>
@@ -121,7 +122,11 @@
                         <td id="price">R$ </td>
                         <td id= "status"><span class="status-pill available"></span></td>
                         <td>
+<<<<<<<< HEAD:page/admin.html
+                            <button type="button" class="btn icon" aria-label="Editar" onclick="window.location.href='${montarLinkEditar(product)}'"></button>                        
+========
                             <button type="button" class="btn icon" aria-label="Editar" onclick="window.location.href='/frontend/page/editProd.html'">✏️</button>        
+>>>>>>>> b8a979a33efc87c192af9ee288d5996f79394a2e:frontend/page/admin.html
                         </td>
                     </tr>
                 </tbody>

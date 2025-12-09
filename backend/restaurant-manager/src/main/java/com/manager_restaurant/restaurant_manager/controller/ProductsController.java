@@ -38,6 +38,16 @@ public class ProductsController {
                 .collect(Collectors.toList());
     }
 
+    @GetMapping("/{idProduct}")
+    public ResponseEntity<Products> getProductById(@PathVariable Long idProduct) {
+        return productsRepository.findById(idProduct)
+                .map(produto -> ResponseEntity.ok(
+                        new Products (produto.getIdProduct(), produto.getName_product(), produto.getDescription_product(), produto.getCategory_products(), produto.getPrice_product(), produto.getStatus()
+                        )
+                ))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping("/create")
     public Products createProduct(@RequestBody Products product){
         return productsService.createProduct(product);
