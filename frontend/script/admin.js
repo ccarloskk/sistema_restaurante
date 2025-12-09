@@ -41,7 +41,7 @@ async function getCardapioAdmin() {
         <td id="price">R$ ${product.price_product}</td>
         <td id= "status"><span class="status-pill ${statusClass}">${statusText}</span></td>
         <td>
-          <button type="button" class="btn icon" aria-label="Editar" onclick="window.location.href='/page/editProd.html?idProduct=${product.idProduct}'">✏️</button>        
+          <button type="button" class="btn icon" aria-label="Editar" onclick="window.location.href='/frontend/page/editProd.html?idProduct=${product.idProduct}'">✏️</button>        
         </td>
       `;
       

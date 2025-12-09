@@ -41,13 +41,11 @@
                 <form class="form-grid">
                     <label class="field">
                         <span>Nome do produto</span>
-                        <!-- id vai aqui no input -->
                         <input type="text" id="nameProduct" required>
                     </label>
 
                     <label class="field">
                         <span>Categoria</span>
-                        <!-- id vai aqui no select -->
                         <select id="category" required>
                             <option value="">Selecione</option>
                             <option value="Produtos">Produtos</option>
@@ -59,28 +57,25 @@
 
                     <label class="field">
                         <span>Preço</span>
-                        <!-- id vai aqui no input -->
-                        <input type="number" id="price" step="0.01" min="0" placeholder="R$ 0,00" required>
+                       <input type="number" id="price" step="0.01" min="0" placeholder="R$ 0,00" required>
                     </label>
 
                     <label class="field">
                         <span>Status</span>
                         <div class="toggle">
-                            <!-- esse já está correto -->
-                            <input type="checkbox" id="available" checked>
+                           <input type="checkbox" id="available" checked>
                             <label for="available">Disponível</label>
                         </div>
                     </label>
 
                     <label class="field field-span">
                         <span>Descrição</span>
-                        <!-- id vai aqui no textarea -->
                         <textarea id="description" rows="3"></textarea>
                     </label>
 
                     <div class="actions field-span">
                         <button type="submit" class="btn primary">Confirmar atualização</button>
-                        <button type="button" class="btn ghost" onclick="window.location.href='/page/admin.html'">Cancelar</button>
+                        <button type="button" class="btn ghost" onclick="window.location.href='/frontend/page/admin.html'">Cancelar</button>
                     </div>
                 </form>
             </section>
