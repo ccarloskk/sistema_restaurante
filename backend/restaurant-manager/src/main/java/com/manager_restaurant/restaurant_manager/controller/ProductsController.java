@@ -31,9 +31,16 @@ public class ProductsController {
         this.productsMapper = productsMapper;
     }
 
+    @GetMapping("/admin/menu")
+    public List<Products> getAdminMenu() {
+        return productsRepository.findAll().stream()
+                .map(p -> new Products(p.getIdProduct(), p.getName_product(), p.getDescription_product(), p.getCategory_products(), p.getPrice_product(), p.getStatus()))
+                .collect(Collectors.toList());
+    }
+
     @GetMapping("/menu")
     public List<Products> getMenu() {
-        return productsRepository.findAll().stream()
+        return productsRepository.findByStatusTrue().stream()
                 .map(p -> new Products(p.getIdProduct(), p.getName_product(), p.getDescription_product(), p.getCategory_products(), p.getPrice_product(), p.getStatus()))
                 .collect(Collectors.toList());
     }

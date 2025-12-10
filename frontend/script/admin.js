@@ -1,4 +1,4 @@
-const cardapioURL = "http://localhost:8080/products/menu";
+const cardapioURL = "http://localhost:8080/products/admin/menu";
 
 async function getCardapioAdmin() {
   try {

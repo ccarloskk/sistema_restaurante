@@ -14,4 +14,5 @@ public interface ProductsRepository extends JpaRepository <Products, Long  > {
     List<Products> findAllByStatusTrue();
     @Query("select p from Products p where p.idProduct = :id and p.status = true")
     Optional<Products> findActiveById(@Param("id") Long idProduct);
+    List<Products> findByStatusTrue();
 }
