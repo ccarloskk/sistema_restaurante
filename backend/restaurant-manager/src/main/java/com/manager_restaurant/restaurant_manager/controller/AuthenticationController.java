@@ -14,10 +14,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin( "*")
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     @Autowired
@@ -42,12 +43,10 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid RegisterDTO data) {
-        if (userRepository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
-
+    public ResponseEntity register(@RequestBody RegisterDTO data) {
+        Optional<Users> existing = userRepository.findByEmail(data.email());
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         Users newUser = new Users(data.user_name(), data.email(), encryptedPassword, data.role());
-
         this.userRepository.save(newUser);
         return ResponseEntity.ok().build();
     }

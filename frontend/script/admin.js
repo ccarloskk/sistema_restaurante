@@ -44,7 +44,7 @@ async function getCardapioAdmin() {
           <button type="button" class="btn icon" aria-label="Editar" onclick="window.location.href='/frontend/page/editProd.html?idProduct=${product.idProduct}'">✏️</button>        
         </td>
       `;
-      
+
       container.appendChild(item);
     });
 
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log('Resposta do backend:', data);
 
       alert('Produto salvo com sucesso!');
-      window.location.href = '/page/admin.html';
+      window.location.href = '/frontend/page/admin.html';
     } catch (erro) {
       console.error('Erro no fetch:', erro);
       alert('Erro ao salvar produto. Tente novamente.');
