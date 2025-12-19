@@ -37,17 +37,18 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> authorize
 
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/auth/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/users/me").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/auth/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/products/admin/menu").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/menu").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/{idProduct}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/products/{idProduct}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/orders/**").permitAll()

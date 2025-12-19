@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,19 @@ public class AuthenticationController {
     @Autowired
     private TokenService tokenService;
 
+
+    @GetMapping("/me")
+    public ResponseEntity<?> me(Authentication authentication) {
+        var email = authentication.getName();
+        var user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
+        System.out.println(authentication.getAuthorities());
+        return ResponseEntity.ok(Map.of(
+                "id", user.getId_user(),
+                "email", user.getEmail(),
+                "role", user.getRole()
+        ));
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthenticationDTO data) {

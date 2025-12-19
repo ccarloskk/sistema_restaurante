@@ -3,54 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar / Editar Comanda</title>
+    <title>Criação de Comandas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/createOrder.css">
+    <script src="../script/createOrder.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container header-content">
-            <div class="logo">🍽️ Point Paraense</div>
-            <nav>
-                <ul>
-                    <li><a href="order.html">Comandas</a></li>
-                    <li><a href="createorder.html" class="active">Nova</a></li>
-                </ul>
-            </nav>
+    <div class="container">
+        <div class="header">
+            <h1>📋 Nova Comanda</h1>
         </div>
-    </header>
 
-    <main class="container">
-        <form id="pedidoForm" class="card">
-            <h2 id="tituloPagina">🧾 Criar Comanda</h2>
+        <div class="form-container">
+            <form id="comandaForm">
+                <div class="form-group">
+                    <label for="numeroComanda">Número da Comanda *</label>
+                    <input type="text" id="numeroComanda" required placeholder="Ex: 001"> id gerada automaticamente
+                </div>
 
-            <section class="dados-cliente">
-                <h3>Dados do Cliente</h3>
-                <label for="nome">Nome:</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite o nome do cliente" required>
+                <div class="form-group">
+                    <label for="nomeCliente">Nome do Cliente *</label>
+                    <input type="text" id="nomeCliente" required placeholder="Digite o nome do cliente">
+                </div>
 
-                <label for="telefone">Telefone:</label>
-                <input type="tel" id="telefone" name="telefone" placeholder="(00) 00000-0000" required>
-            </section>
+                <div class="form-group">
+                    <label for="status">Status do Pedido</label>
+                    <select id="status">
+                        <option value="pendente">Pendente</option>
+                        <option value="finalizado">Finalizado</option>
+                        <option value="cancelado">Cancelado</option>
+                    </select>
+                </div>
+                 <main>
+                    <div class="container">
+                        <div id="form" class="form-section">
+                        <h2>Cardápio</h2>
+                        <form id="orderForm">
+                            <div class="products-grid">
+                            <div class="products-item">
+                                <h3 class="name-products" data-id=""></h3>
+                                <p class="describe"></p>
+                                <p class="price">R$</p>
+                                <div class="quantity-control">
+                                <button type="button" class="decrease">-</button>
+                                <span class="quantity">0</span>
+                                <button type="button" class="increase">+</button>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="order-summary">
+                            <h3>Total do pedido</h3>
+                            <div id="itensSelecionados"></div>
+                            <p class="total" id="total">Total: R$ <span id="totalOrder"></span></p>
+                            </div>            
+                        </form>
+                        </div>
+                    </div>
+                    </main>
+                <div class="actions">
+                    <button onclick="window.location.href='./order.html'" type="button" class="btn btn-secondary">Cancelar</button>
+                    <!-- <button type="button" class="btn btn-primary">Visualizar</button> -->
+                    <button type="submit" class="btn btn-primary">Salvar Comanda</button>
+                </div>
+            </form>
 
-            <section>
-                <h3>Produtos</h3>
-                <div class="produtos-grid" id="listaProdutos"></div>
-            </section>
-
-            <section class="resumo-pedido">
-                <h3>Resumo do Pedido</h3>
-                <div id="itensSelecionados"></div>
-                <p class="total">Total: <strong>R$ <span id="totalPedido">0,00</span></strong></p>
-            </section>
-
-            <input type="submit" value="💾 Salvar Comanda">
-        </form>
-    </main>
-
-    <footer>
-        <p>© 2025 Point Paraense — Todos os direitos reservados.</p>
-    </footer>
-
-    <script src="../js/createorder.js"></script>
+            <div class="comanda-preview" id="comandaPreview">
+                <h3>Prévia da Comanda</h3>
+                <div id="previewContent"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
