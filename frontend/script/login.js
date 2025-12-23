@@ -68,9 +68,9 @@ async function loginUser(event) {
     alert('Login realizado com sucesso!');
 
     if (role === 'ADMIN') {
-      window.location.href = '/frontend/page/admin.html';   
+      window.location.href = '/frontend/admin/admin.html';   
     } else if (role === 'GARCOM') {
-      window.location.href = '/page/garcom.html'; 
+      window.location.href = '/frontend/admin/garcom.html'; 
     } else {
       alert('Tipo de usuário não reconhecido: ' + role);
     }

@@ -114,4 +114,24 @@ async function updateSumTotal() {
     console.error("Erro em updateSumTotal:", err);
   }
 }
+
+function hojeYYYYMMDDLocal() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+function marcarDataDeHojeAutomatico() {
+  const hoje = hojeYYYYMMDDLocal();
+
+  document.querySelectorAll('input[type="date"][data-default-today]').forEach((input) => {
+    if (!input.value) input.value = hoje;
+
+    input.addEventListener("blur", () => {
+      if (!input.value) input.value = hojeYYYYMMDDLocal();
+    });
+  });
+}
+
 getCardapio()
+hojeYYYYMMDDLocal()

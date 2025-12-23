@@ -72,7 +72,7 @@ async function updateProduct(event) {
     console.log('Produto atualizado com sucesso:', retorno);
 
     alert('Produto atualizado!');
-    window.location.href = '/frontend/page/admin.html';
+    window.location.href = '/frontend/admin/admin.html';
   } catch (erro) {
     console.error('Erro no fetch (PUT):', erro);
     alert('Erro ao atualizar produto. Tente novamente mais tarde.');
@@ -91,7 +91,7 @@ function initializePage() {
   const idProduct = collectId();
   if (!idProduct) {
     alert('Nenhum ID de produto informado. Redirecionando...');
-    window.location.href = '/frontend/page/admin.html';
+    window.location.href = '/frontend/admin/admin.html';
     return;
   }
 

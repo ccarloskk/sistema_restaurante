@@ -13,8 +13,10 @@ async function getCardapio() {
       if (product.idProduct == null) {
         return;
       }
+      
+      const id = product.idProduct;
 
-      quantities[product.idProduct] = quantities[product.idProduct] ?? 0;
+      quantities[id] = quantities[id] ?? 0;
 
       const item = document.createElement("div");
       item.classList.add("products-item");
@@ -33,7 +35,7 @@ async function getCardapio() {
       const increaseButton = item.querySelector(".increase");
       const decreaseButton = item.querySelector(".decrease");
 
-      let localQty = 0;
+      let localQty = quantities[id];
 
       increaseButton.addEventListener("click", () => {
         localQty += 1;
@@ -115,3 +117,4 @@ async function updateSumTotal() {
   }
 }
 getCardapio()
+setInterval(getCardapio, 3000)
