@@ -17,18 +17,12 @@
         <div class="form-container">
             <form id="comandaForm">
                 <div class="form-group">
-                    <label for="numeroComanda">Número da Comanda *</label>
-                    <input type="text" id="numeroComanda" required placeholder="Ex: 001"> id gerada automaticamente
-                </div>
-
-                <div class="form-group">
                     <label for="nomeCliente">Nome do Cliente *</label>
-                    <input type="text" id="nomeCliente" required placeholder="Digite o nome do cliente">
+                    <input type="text" id="nameClient" required placeholder="Digite o nome do cliente">
                 </div>
-
                 <div class="form-group">
                     <label for="data">Data *</label>
-                    <input type="date" id="dataPedido" data-default-today>
+                    <input type="date" id="dateOrder" data-default-today>
                 </div>
 
                 <div class="form-group">
@@ -43,7 +37,7 @@
                     <div class="container">
                         <div id="form" class="form-section">
                         <h2>Cardápio</h2>
-                        <form id="orderForm">
+                        <div id="orderForm">
                             <div class="products-grid">
                             <div class="products-item">
                                 <h3 class="name-products" data-id=""></h3>
@@ -61,17 +55,15 @@
                             <div id="itensSelecionados"></div>
                             <p class="total" id="total">Total: R$ <span id="totalOrder"></span></p>
                             </div>            
-                        </form>
+                        </div>
                         </div>
                     </div>
                     </main>
                 <div class="actions">
                     <button onclick="window.location.href='./order.html'" type="button" class="btn btn-secondary">Cancelar</button>
-                    <!-- <button type="button" class="btn btn-primary">Visualizar</button> -->
                     <button type="submit" class="btn btn-primary">Salvar Comanda</button>
                 </div>
             </form>
-
             <div class="comanda-preview" id="comandaPreview">
                 <h3>Prévia da Comanda</h3>
                 <div id="previewContent"></div>

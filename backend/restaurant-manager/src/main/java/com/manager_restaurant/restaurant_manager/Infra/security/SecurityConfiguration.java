@@ -51,7 +51,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/orders/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/orders/createOrder").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/orders/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/orders/").hasRole("ADMIN")
 

@@ -133,5 +133,37 @@ function marcarDataDeHojeAutomatico() {
   });
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("comandaForm");
+  form.addEventListener("submit", createOrder);
+});
+
+async function createOrder(event) {
+  event.preventDefault();
+
+  const order_URL = "http://localhost:8080/orders/createOrder";
+
+  const payload = {
+    name_customer: document.getElementById("nameClient").value,
+    date_order: document.getElementById("dateOrder").value,
+    status: document.getElementById("status").value,
+    total: Number(document.getElementById("total").value),
+  };
+
+  const res = await fetch(order_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+
+  if (!res.ok) {
+    const errText = await res.text();
+    throw new Error(`HTTP ${res.status} - ${errText}`);
+  }
+
+  const data = await res.json();
+  console.log("Pedido criado:", data);
+}
+
 getCardapio()
 hojeYYYYMMDDLocal()

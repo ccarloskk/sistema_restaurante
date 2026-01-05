@@ -117,4 +117,4 @@ async function updateSumTotal() {
   }
 }
 getCardapio()
-setInterval(getCardapio, 3000)
+// setInterval(getCardapio, 3000)

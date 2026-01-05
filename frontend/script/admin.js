@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  form.addEventListener('submit', async (event) => {
+    form.addEventListener('submit', async (event) => {
     event.preventDefault();
     console.log('Submit do formulário disparou');
 

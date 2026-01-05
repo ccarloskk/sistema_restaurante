@@ -39,7 +39,7 @@ public class OrderController {
         return orderService.updateTotalPublic(totalPublicList);
     }
 
-    @PostMapping
+    @PostMapping("/createOrder")
     public Order createOrder(@RequestBody Order order){
         return orderService.createOrder(order);
     }
