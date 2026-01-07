@@ -192,6 +192,14 @@ main label {
   margin-top: 10px;
 }
 
+.formaConsumo {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-primary);
+  margin-top: 5px;
+}
+
 main input[type="text"],
 main input[type="tel"] {
   width: 100%;

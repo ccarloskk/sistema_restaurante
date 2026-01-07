@@ -43,13 +43,20 @@
               <div id="itensSelecionados"></div>
               <p class="total" id="total">Total: R$ <span id="totalOrder"></span></p>
             </div>            
+            
             <div class="dados-cliente">
               <h3>Seus Dados</h3>
               <label for="nome">Nome:</label>
               <input type="text" id="customerName" name="nome" required />
+              <label for="Consumo">Forma de consumo:</label>
+              <select class="formaConsumo">
+                        <option value="local">Local</option>
+                        <option value="retirada">Retirada</option>
+              </select>
               <label for="telefone">Telefone:</label>
               <input type="tel" id="phone" name="telefone" required />
             </div>
+
             <input id="sendButton" type="submit" value="Finalizar Pedido" />
           </form>
         </div>

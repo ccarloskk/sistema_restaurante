@@ -117,4 +117,59 @@ async function updateSumTotal() {
   }
 }
 getCardapio()
-// setInterval(getCardapio, 3000)
+
+function enviarPedidoWhats() {
+
+  const nomeCliente = document.getElementById("customerName").value;
+  const telefoneCliente = document.getElementById("phone").value;
+  const consumo = document.querySelector(".formaConsumo").value;
+
+  let mensagem = "Olá, quero finalizar o seguinte pedido:%0A%0A";
+
+  mensagem += "---- DADOS DO CLIENTE ----%0A";
+  mensagem += `Nome: ${nomeCliente}%0A`;
+  mensagem += `Telefone: ${telefoneCliente}%0A`;
+  mensagem += `Forma de consumo: ${consumo}%0A`;
+  mensagem += "--------------------------%0A%0A";
+
+  const container = document.querySelector(".products-grid");
+  const itensDOM = container.querySelectorAll(".products-item");
+
+  let possuiItem = false;
+
+  itensDOM.forEach(item => {
+    const nome = item.querySelector(".name-products").textContent;
+    const precoTexto = item.querySelector(".price").textContent;
+    const quantidadeTexto = item.querySelector(".quantity").textContent;
+
+    const qtd = Number(quantidadeTexto);
+
+    if (qtd > 0) {
+      possuiItem = true;
+
+      const preco = precoTexto.replace("R$", "").trim();
+
+      mensagem += `• ${nome} — Qtd: ${qtd} — Valor: R$ ${preco}%0A`;
+    }
+  });
+
+  if (!possuiItem) {
+    alert("Você ainda não adicionou nenhum item ao pedido.");
+    return;
+  }
+
+  mensagem += "%0A";
+  mensagem += `Total do pedido: R$ ${totalEl.textContent}%0A`;
+  mensagem += "%0AObrigado!";
+
+  const telefoneRestaurante = "5541996520121";
+
+  const link = `https://wa.me/${telefoneRestaurante}?text=${mensagem}`;
+
+  window.open(link, "_blank");
+}
+
+document
+  .getElementById("sendButton")
+  .addEventListener("click", enviarPedidoWhats);
+
