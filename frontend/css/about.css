@@ -179,10 +179,14 @@ ul {
   .logo{
     font-size: 40px;
   }
-  .header-content{
+   .header-content{
     font-size: 22px;
-    height: 185px;
+    height: 160px;
   }
+
+.main-nav{
+  font-size: 18px
+}
   .hero-text h2 {
     font-size: 35px;
   }
