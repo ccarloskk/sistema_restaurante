@@ -261,6 +261,7 @@ footer {
 @media (max-width: 768px) {
   body{
     overflow: auto;
+    overflow-x: hidden;
   }
 
   header .header-content {
@@ -296,6 +297,7 @@ footer {
 @media (max-width: 480px) {
   body{
     overflow: auto;
+    overflow-x: hidden;
   }
   .logo{
     font-size: 40px;
@@ -305,12 +307,11 @@ footer {
     height: 160px;
   }
 
-.main-nav{
-  font-size: 18px
-}
+  .main-nav{
+    font-size: 18px
+  }
   .hero-text h2 {
     font-size: 35px;
-    overflow: hidden;
   }
 
   .hero-text p {

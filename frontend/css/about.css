@@ -152,7 +152,7 @@ ul {
   .main-nav ul {
     flex-direction: column;
     gap: 10px;
-    align-items: center;
+    width: 100%;
   }
 
   .mobile-toggle {
@@ -190,9 +190,9 @@ ul {
     height: 160px;
   }
 
-.main-nav{
-  font-size: 18px
-}
+  .main-nav{
+    font-size: 18px
+  }
   .hero-text h2 {
     font-size: 35px;
   }
