@@ -260,8 +260,7 @@ footer {
 
 @media (max-width: 768px) {
   body{
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
   }
 
   header .header-content {
@@ -296,8 +295,7 @@ footer {
 
 @media (max-width: 480px) {
   body{
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: auto;
   }
   .logo{
     font-size: 40px;
