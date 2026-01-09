@@ -277,8 +277,9 @@ footer {
 }
 
 @media (max-width: 768px) {
-  body{
-    overflow: auto;
+   body{
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   header .header-content {
     flex-direction: column;
