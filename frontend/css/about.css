@@ -112,6 +112,9 @@ ul {
 }
 
 @media (max-width: 1024px) {
+  body{
+    overflow: auto;
+  }
   .logo {
     margin-left: 100px;
     font-size: 1.6rem;
@@ -128,6 +131,9 @@ ul {
 }
 
 @media (max-width: 768px) {
+  body{
+    overflow: auto;
+  }
   header .header-content {
     flex-direction: column;
     align-items: flex-start;

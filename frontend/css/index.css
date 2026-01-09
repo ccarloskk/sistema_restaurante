@@ -257,6 +257,10 @@ footer {
 }
 
 @media (max-width: 768px) {
+  body{
+    overflow: auto;
+  }
+  
   header .header-content {
     flex-direction: column;
     align-items: flex-start;
