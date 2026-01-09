@@ -323,7 +323,8 @@ footer {
 
 @media (max-width: 480px) {
   body{
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
   .logo{
     font-size: 40px;
