@@ -37,13 +37,13 @@ public class OrderItemsService {
     }
 
     public OrderItems createOrderItem(OrderItems orderItem) {
+        System.out.println("ID ORDER = " + orderItem.getOrder().getId_order());
+        System.out.println("ID PRODUCT = " + orderItem.getProduct().getIdProduct());
         OrderItems savedItem = orderItemsRepository.save(orderItem);
-
         Order order = commandRepository.findById(savedItem.getOrder().getId_order())
                 .orElseThrow(() -> new RuntimeException("Pedido não encontrado"));
         Products product = productsRepository.findById(savedItem.getProduct().getIdProduct())
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
-
         savedItem.setOrder(order);
         savedItem.setProduct(product);
         orderService.updateTotal(order);

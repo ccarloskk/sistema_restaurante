@@ -1,0 +1,119 @@
+:root {
+    --color-primary: #b22222;
+    --color-primary-light: #ffe4e1;
+    --color-background: #f9f9f9;
+    --color-surface: #ffffff;
+    --color-text: #333333;
+    --color-text-light: #555555;
+    --color-highlight-bg: #fff0f0;
+    --font-font: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+main .container {
+    background-color: var(--color-surface);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    width: 700px;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 40px auto;
+    font-family: var(--font-font);
+    color: var(--color-text);
+}
+
+main .form-section h2 {
+    color: var(--color-primary);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+main .products-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+main .products-item {
+    background-color: var(--color-primary-light);
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.describe {
+    font-size: 16px;
+}
+
+main .name-products {
+    color: var(--color-primary);
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+main .price {
+    color: var(--color-text-light);
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.decrease {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.increase {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.quantity {
+    font-weight: bold;
+}
+
+main .order-summary {
+    background-color: var(--color-highlight-bg);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+main .order-summary h3 {
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+main .total {
+    font-weight: bold;
+    color: var(--color-text);
+}

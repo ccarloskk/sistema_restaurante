@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/order_items")
+@RequestMapping("/order_item")
 @CrossOrigin(origins = "*")
 public class OrderItemsController {
 
@@ -28,7 +28,7 @@ public class OrderItemsController {
         return orderItemsService.listOrderItemsWithDetails();
     }
 
-    @PostMapping()
+    @PostMapping("/CreateOrderItem")
     public OrderItems createOrderItem(@RequestBody OrderItems orderItem){
         return orderItemsService.createOrderItem(orderItem);
     }

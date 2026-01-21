@@ -46,16 +46,18 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/products/admin/menu").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/menu").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/{idProduct}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/products/{idProduct}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/products/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE, "/products/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/orders/updateTotalPublic").permitAll()
                         .requestMatchers(HttpMethod.POST, "/orders/createOrder").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/orders/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/orders/**").permitAll()
 
+                        .requestMatchers(HttpMethod.GET, "/order_item/details").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/order_item/CreateOrderItem").permitAll()
+                        .requestMatchers(HttpMethod.DELETE ,"/order_item/id_order_item").permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

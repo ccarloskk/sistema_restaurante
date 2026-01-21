@@ -1,27 +1,32 @@
 const quantities = {};
 const cardapioURL = "http://localhost:8080/products/menu";
 const sumTotalURL = "http://localhost:8080/orders/updateTotalPublic";
+const postCreateOrder = "http://localhost:8080/order_item/CreateOrderItem";
+const createOrderURL = "http://localhost:8080/orders/createOrder";
+
+const token = localStorage.getItem("token");
 
 async function getCardapio() {
   try {
     const response = await fetch(cardapioURL);
     const products = await response.json();
+
     const container = document.querySelector(".products-grid");
     container.innerHTML = "";
 
     products.forEach((product) => {
-      if (product.idProduct == null) {
-        return;
-      }
+      if (!product.idProduct) return;
 
-      quantities[product.idProduct] = quantities[product.idProduct] ?? 0;
+      quantities[product.idProduct] = 0;
 
       const item = document.createElement("div");
       item.classList.add("products-item");
+
       item.innerHTML = `
         <h3 class="name-products">${product.name_product}</h3>
         <h4 class="describe">${product.description_product || ""}</h4>
         <p class="price">R$ ${Number(product.price_product).toFixed(2)}</p>
+
         <div class="quantity-control">
           <button type="button" class="decrease">-</button>
           <span class="quantity">0</span>
@@ -30,21 +35,21 @@ async function getCardapio() {
       `;
 
       const quantitySpan = item.querySelector(".quantity");
-      const increaseButton = item.querySelector(".increase");
-      const decreaseButton = item.querySelector(".decrease");
+      const increaseBtn = item.querySelector(".increase");
+      const decreaseBtn = item.querySelector(".decrease");
 
       let localQty = 0;
 
-      increaseButton.addEventListener("click", () => {
-        localQty += 1;
+      increaseBtn.addEventListener("click", () => {
+        localQty++;
         quantitySpan.textContent = localQty;
         quantities[product.idProduct] = localQty;
         updateSumTotal();
       });
 
-      decreaseButton.addEventListener("click", () => {
+      decreaseBtn.addEventListener("click", () => {
         if (localQty > 0) {
-          localQty -= 1;
+          localQty--;
           quantitySpan.textContent = localQty;
           quantities[product.idProduct] = localQty;
           updateSumTotal();
@@ -53,12 +58,12 @@ async function getCardapio() {
 
       container.appendChild(item);
     });
-  } catch (erro) {
-    console.error("Erro ao carregar cardápio:", erro);
+  } catch (err) {
+    console.error("Erro ao carregar cardápio:", err);
   }
 }
 
-const totalEl = document.getElementById("totalOrder");
+const totalEl = document.getElementById("TotalValue");
 
 function formatBRLNumber(value) {
   return Number(value).toLocaleString("pt-BR", {
@@ -66,13 +71,9 @@ function formatBRLNumber(value) {
     maximumFractionDigits: 2,
   });
 }
-const token = localStorage.getItem("token");
 
 async function updateSumTotal() {
   try {
-    console.debug("updateSumTotal chamado");
-    console.debug("token (do localStorage):", token);
-
     const body = Object.entries(quantities)
       .filter(([, qty]) => qty > 0)
       .map(([id, qty]) => ({
@@ -80,38 +81,28 @@ async function updateSumTotal() {
         product: { idProduct: Number(id) },
       }));
 
-    console.debug("Payload (body) construído:", body);
-
     if (body.length === 0) {
       totalEl.textContent = formatBRLNumber(0);
       return;
     }
 
-    const init = {
+    const res = await fetch(sumTotalURL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: JSON.stringify(body),
-    };
+    });
 
-    const res = await fetch(sumTotalURL, init);
-
-    if (!res.ok) {
-      const text = await res.text();
-      console.error("Servidor retornou erro:", res.status, text);
-      totalEl.textContent = formatBRLNumber(0);
-      return;
-    }
+    if (!res.ok) throw new Error("Erro ao calcular total");
 
     const sum = await res.json();
-    const total =
-      typeof sum === "number" ? sum : sum.total ?? sum.totalPublic ?? 0;
+    const total = typeof sum === "number" ? sum : sum.total ?? 0;
+
     totalEl.textContent = formatBRLNumber(total);
-    
   } catch (err) {
-    console.error("Erro em updateSumTotal:", err);
+    console.error("Erro no total:", err);
   }
 }
 
@@ -124,25 +115,24 @@ function hojeYYYYMMDDLocal() {
 function marcarDataDeHojeAutomatico() {
   const hoje = hojeYYYYMMDDLocal();
 
-  document.querySelectorAll('input[type="date"][data-default-today]').forEach((input) => {
-    if (!input.value) input.value = hoje;
-
-    input.addEventListener("blur", () => {
-      if (!input.value) input.value = hojeYYYYMMDDLocal();
+  document
+    .querySelectorAll('input[type="date"][data-default-today]')
+    .forEach((input) => {
+      if (!input.value) input.value = hoje;
+      input.addEventListener("blur", () => {
+        if (!input.value) input.value = hojeYYYYMMDDLocal();
+      });
     });
-  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  marcarDataDeHojeAutomatico();
+
   const form = document.getElementById("comandaForm");
-  form.addEventListener("submit", createOrder);
+  form.addEventListener("submit", handleSubmitComanda);
 });
 
-async function createOrder(event) {
-  event.preventDefault();
-
-  const order_URL = "http://localhost:8080/orders/createOrder";
-
+async function createOrder() {
   const payload = {
     name_customer: document.getElementById("nameClient").value,
     date_order: document.getElementById("dateOrder").value,
@@ -150,20 +140,100 @@ async function createOrder(event) {
     total: Number(document.getElementById("total").value),
   };
 
-  const res = await fetch(order_URL, {
+  const res = await fetch(createOrderURL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
   });
 
   if (!res.ok) {
-    const errText = await res.text();
-    throw new Error(`HTTP ${res.status} - ${errText}`);
+    const err = await res.text("Funcionando");
+    throw new Error(err);
   }
 
-  const data = await res.json();
-  console.log("Pedido criado:", data);
+  return await res.json();
 }
 
-getCardapio()
-hojeYYYYMMDDLocal()
+async function createItemOrder() {
+  const itens = Object.entries(quantities)
+    .filter(([, qty]) => qty > 0)
+    .map(([idProduct, quantity]) => ({
+      quantity,
+      notes: "",
+      product: { 
+        idProduct: Number(idProduct) },
+      order: { 
+        id_order: window.orderIdAtual },
+    }));
+ 
+  if (itens.length === 0) {
+    throw new Error("Nenhum item selecionado");
+  }
+
+  for (const item of itens) {
+  await fetch(postCreateOrder, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(item)
+  });
+}
+
+  // if (!res.ok) {
+  //   throw new Error("ERRO AO CRIAR PEDIDO");z
+  // }
+  // else{
+  //   console.log("FUNCIONANDO")
+  // }
+}
+let pedidoCriado = false;
+window.orderIdAtual = null;
+
+async function handleSubmitComanda(event) {
+  event.preventDefault();
+
+  const btn = event.submitter;
+  btn.disabled = true;
+
+  try {
+    if (!pedidoCriado) {
+      btn.textContent = "Salvando comanda...";
+
+      const order = await createOrder();
+
+      window.orderIdAtual = order.id_order;
+      pedidoCriado = true;
+
+      liberarCardapio();
+
+      btn.textContent = "Confirmar pedido";
+      btn.disabled = false;
+      return;
+    }
+
+    btn.textContent = "Enviando pedido...";
+
+    await createItemOrder();
+
+    alert("Pedido confirmado com sucesso!");
+    window.location.href = "../admin/order.html";
+
+  } catch (err) {
+    console.error(err);
+    alert(err.message || "Erro ao processar o pedido");
+
+    btn.disabled = false;
+    btn.textContent = pedidoCriado
+      ? "Confirmar pedido"
+      : "Salvar Comanda";
+  }
+}
+
+function liberarCardapio() {
+  const section = document.getElementById("secaoCardapio");
+
+  section.style.display = "block";
+
+  getCardapio();
+
+  section.scrollIntoView({ behavior: "smooth" });
+}
