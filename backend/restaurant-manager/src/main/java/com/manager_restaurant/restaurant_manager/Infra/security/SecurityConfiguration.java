@@ -50,14 +50,14 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.PUT, "/products/{idProduct}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/products/**").permitAll()
 
-                        .requestMatchers(HttpMethod.GET, "/orders/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/orders/details").permitAll()
                         .requestMatchers(HttpMethod.POST, "/orders/updateTotalPublic").permitAll()
                         .requestMatchers(HttpMethod.POST, "/orders/createOrder").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/orders/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/order_item/details").permitAll()
                         .requestMatchers(HttpMethod.POST, "/order_item/CreateOrderItem").permitAll()
-                        .requestMatchers(HttpMethod.DELETE ,"/order_item/id_order_item").permitAll()
+                        .requestMatchers(HttpMethod.DELETE ,"/order_item/**").permitAll()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

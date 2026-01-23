@@ -12,16 +12,17 @@ import java.util.List;
 @Repository
 public interface OrderItemsRepository extends JpaRepository<OrderItems, Long> {
     @Query("""
-    SELECT new com.manager_restaurant.restaurant_manager.dto.ItensComandasDTO(
-        oi.id_order_item,
-        o.name_customer,
-        p.name_product,
-        oi.quantity,
-        oi.notes
-    )
-    FROM OrderItems oi
-    JOIN oi.order o
-    JOIN oi.product p
-""")
-    List<ItensComandasDTO> buscarItensComDetalhes();
+                SELECT new com.manager_restaurant.restaurant_manager.dto.ItensComandasDTO(
+                    oi.id_order_item,
+                    o.id_order,
+                    o.name_customer,
+                    p.name_product,
+                    oi.quantity,
+                    oi.notes
+                )
+                FROM OrderItems oi
+                JOIN oi.order o
+                JOIN oi.product p
+            """)
+    List<ItensComandasDTO> seacherWithDetails();
 }

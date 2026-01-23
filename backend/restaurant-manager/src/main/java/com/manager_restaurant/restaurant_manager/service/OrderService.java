@@ -2,10 +2,12 @@ package com.manager_restaurant.restaurant_manager.service;
 
 
 
+import com.manager_restaurant.restaurant_manager.dto.OrdersDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.CommandRepository;
+import com.manager_restaurant.restaurant_manager.repository.OrdersRepository;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +19,12 @@ public class OrderService {
 
     private CommandRepository commandRepository;
     private ProductsRepository productsRepository;
+    private OrdersRepository ordersRepository;
 
-    public OrderService(CommandRepository commandRepository, ProductsRepository productsRepository) {
+    public OrderService(CommandRepository commandRepository, ProductsRepository productsRepository, OrdersRepository ordersRepository) {
         this.commandRepository = commandRepository;
         this.productsRepository = productsRepository;
+        this.ordersRepository = ordersRepository;
     }
 
     public BigDecimal updateTotal(Order order) {
@@ -53,8 +57,8 @@ public class OrderService {
         return totalPublic;
     }
 
-    public List<Order> listOrders() {
-        return commandRepository.findAll();
+    public List<OrdersDTO> listOrdersDTO() {
+        return ordersRepository.listOrdersDTO();
     }
 
     public Order searchOrder(Long id_order) {

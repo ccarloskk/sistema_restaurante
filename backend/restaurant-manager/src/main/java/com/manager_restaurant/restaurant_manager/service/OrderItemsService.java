@@ -62,7 +62,7 @@ public class OrderItemsService {
     }
 
     public List<ItensComandasDTO> listOrderItemsWithDetails() {
-        return orderItemsRepository.buscarItensComDetalhes();
+        return orderItemsRepository.seacherWithDetails();
     }
 
     public OrderItems updateOrderItem(Long id_order_item, OrderItems orderItem) {

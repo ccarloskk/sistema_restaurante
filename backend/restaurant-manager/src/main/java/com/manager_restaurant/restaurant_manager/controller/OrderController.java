@@ -1,5 +1,6 @@
 package com.manager_restaurant.restaurant_manager.controller;
 
+import com.manager_restaurant.restaurant_manager.dto.OrdersDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.repository.OrderItemsRepository;
@@ -29,9 +30,9 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @GetMapping
-    public List<Order> listOrders(){
-        return orderService.listOrders();
+    @GetMapping("/details")
+    public List<OrdersDTO> listOrdersDTO() {
+        return orderService.listOrdersDTO();
     }
 
     @PostMapping("/updateTotalPublic")
