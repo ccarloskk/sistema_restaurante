@@ -1,0 +1,145 @@
+:root {
+    --color-primary: #b22222;
+    --color-primary-light: #ffe4e1;
+    --color-background: #f9f9f9;
+    --color-surface: #ffffff;
+    --color-text: #333333;
+    --color-text-light: #555555;
+    --color-highlight-bg: #fff0f0;
+    --font-font: "Roboto", sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-font);
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+/* Header */
+.header {
+    background-color: var(--color-primary);
+    color: white;
+    padding: 16px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h1 {
+    font-size: 20px;
+}
+
+.role {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Container */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 0 16px;
+}
+
+/* Pedido */
+.order-card {
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.order-header h2 {
+    font-size: 18px;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status.open {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary);
+}
+
+.order-list {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.order-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.item-name {
+    color: var(--color-text-light);
+}
+
+.item-qty {
+    font-weight: 500;
+}
+
+.order-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.btn-finish {
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+.btn-canceled {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+.btn-edit {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.btn-finish:hover {
+    opacity: 0.85;
+}

@@ -28,7 +28,6 @@ body {
     margin: 0 auto;
 }
 
-/* Header */
 .header {
     background-color: var(--color-primary);
     color: white;
@@ -47,7 +46,6 @@ body {
     font-weight: 500;
 }
 
-/* Botões */
 .btn {
     padding: 12px 24px;
     border: none;
@@ -79,7 +77,6 @@ body {
     color: white;
 }
 
-/* Filtros */
 .filters {
     background-color: var(--color-surface);
     padding: 20px;
@@ -123,7 +120,6 @@ body {
     color: white;
 }
 
-/* Lista de Comandas */
 .comandas-list {
     display: flex;
     flex-direction: column;
@@ -150,7 +146,6 @@ body {
     color: var(--color-text-light);
 }
 
-/* Status */
 .status.aberta {
     color: #28a745;
     font-weight: 600;
@@ -161,7 +156,6 @@ body {
     font-weight: 600;
 }
 
-/* Empty state */
 .empty-state {
     text-align: center;
     padding: 60px 20px;
@@ -179,7 +173,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* Modal */
 .modal {
     display: none;
     position: fixed;
@@ -227,7 +220,6 @@ body {
     cursor: pointer;
 }
 
-/* Responsivo */
 @media (max-width: 768px) {
     .header {
         flex-direction: column;

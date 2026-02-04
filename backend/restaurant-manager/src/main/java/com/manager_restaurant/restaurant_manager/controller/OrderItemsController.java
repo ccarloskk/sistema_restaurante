@@ -1,6 +1,7 @@
 package com.manager_restaurant.restaurant_manager.controller;
 
 import com.manager_restaurant.restaurant_manager.dto.ItensComandasDTO;
+import com.manager_restaurant.restaurant_manager.dto.OrderItemsDTO;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.service.OrderItemsService;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +19,9 @@ public class OrderItemsController {
         this.orderItemsService = orderItemsService;
     }
 
-    @GetMapping
-    public List<OrderItems> listOrderItems(){
-        return orderItemsService.listOrderItems();
+    @GetMapping("/{id_order}")
+    public List<OrderItemsDTO> listOrderItemsByOrderGrouped(@PathVariable Long id_order) {
+        return orderItemsService.listOrderItemsByOrderGrouped(id_order);
     }
 
     @GetMapping("/details")

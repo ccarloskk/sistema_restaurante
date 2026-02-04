@@ -9,7 +9,9 @@ import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.CommandRepository;
 import com.manager_restaurant.restaurant_manager.repository.OrdersRepository;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -57,7 +59,11 @@ public class OrderService {
         return totalPublic;
     }
 
-    public List<OrdersDTO> listOrdersDTO() {
+    public List<OrdersDTO> findAllOrdersDTO(Long id_order) {
+        return ordersRepository.findAllOrders(id_order);
+    }
+
+    public  List<OrdersDTO> listOrdersDTO() {
         return ordersRepository.listOrdersDTO();
     }
 

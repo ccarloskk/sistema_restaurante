@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos do Cliente</title>
+    <link rel="stylesheet" href="../css/orderDetails.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="../script/orderDetails.js" defer></script>
+</head>
+<body>
+
+    <header class="header">
+        <h1>📋 Pedido do Cliente</h1>
+        <span class="role">Acesso: Garçom</span>
+    </header>
+    <main class="container">
+        <section class="order-card">
+            <div class="order-header">
+            <h2 id="clientName"></h2>
+            <span id="orderStatus" class="status open"></span>
+            </div>
+
+            <ul id="orderList" class="order-list">
+            </ul>
+
+            <div class="order-footer">
+                <span id="orderTotal" class="total">Total: R$</span>
+                <button onclick="window.location.href='../admin/order.html'" class="btn-canceled">Cancelar</button>
+                <button class="btn-edit">Editar</button>
+                <button class="btn-finish">Finalizar Pedido</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

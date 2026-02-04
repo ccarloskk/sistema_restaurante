@@ -2,6 +2,7 @@ package com.manager_restaurant.restaurant_manager.service;
 
 
 import com.manager_restaurant.restaurant_manager.dto.ItensComandasDTO;
+import com.manager_restaurant.restaurant_manager.dto.OrderItemsDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.model.Products;
@@ -25,6 +26,10 @@ public class OrderItemsService {
         this.orderService = orderService;
         this.commandRepository = commandRepository;
         this.productsRepository = productsRepository;
+    }
+
+    public  List<OrderItemsDTO> listOrderItemsByOrderGrouped(Long id_order) {
+        return orderItemsRepository.findItemsByOrderGrouped(id_order);
     }
 
     public List<OrderItems> listOrderItems() {

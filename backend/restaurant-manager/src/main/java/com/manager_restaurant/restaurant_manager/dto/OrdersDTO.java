@@ -1,5 +1,7 @@
 package com.manager_restaurant.restaurant_manager.dto;
 
+import com.manager_restaurant.restaurant_manager.model.Order;
+
 import java.math.BigDecimal;
 import java.util.Date;
 

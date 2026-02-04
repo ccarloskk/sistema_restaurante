@@ -30,6 +30,11 @@ public class OrderController {
         this.orderService = orderService;
     }
 
+    @GetMapping("/details/{id_order}")
+    public List<OrdersDTO> orderDetails(@PathVariable Long id_order) {
+        return orderService.findAllOrdersDTO(id_order);
+    }
+
     @GetMapping("/details")
     public List<OrdersDTO> listOrdersDTO() {
         return orderService.listOrdersDTO();
