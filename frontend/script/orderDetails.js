@@ -65,7 +65,6 @@ function renderOrder(items, client) {
         orderList.appendChild(li);
     });
 }
-detailsClient(clientUrl);
 
 
 

@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/food.css">
+  <script src="../script/food.js"></script>
 </head>
 <body>
 
@@ -14,39 +15,29 @@
     <h1>Painel da Cozinha</h1>
   </header>
 
-  <main class="container">
+  <main class="container" id="ordersContainer">
 
-    <section class="order-card">
-      <div class="order-header">
-        <span class="order-number">Pedido #102</span>
-        <span class="order-time">18:45</span>
-      </div>
+  <section class="order-card" id="orderTemplate" style="display: none;">
+    <div class="order-header">
+      <span class="order-number">Ordem do pedido #</span>
+      <span class="order-time"></span>
+    </div>
 
-      <div class="order-info">
-        <p><strong>Mesa:</strong> 05</p>
-        <p><strong>Cliente:</strong> João</p>
-      </div>
+    <div class="order-info">
+      <p class="comanda"><strong>Comanda:</strong> #</p>
+      <p class="client"><strong>Cliente:</strong></p>
+    </div>
 
-      <div class="order-items">
-        <h3>Itens do Pedido</h3>
-        <ul>
-          <li>🍔 X-Burger</li>
-          <li>🍟 Batata Média</li>
-          <li>🥤 Suco de Laranja</li>
-        </ul>
-      </div>
+    <div class="orderContainer">
+      <h3>Itens do Pedido</h3>
+      <ul class="orderList"></ul>
+    </div>
 
-      <div class="order-notes">
-        <strong>Observações:</strong>
-        <p>Sem cebola no hambúrguer.</p>
-      </div>
+    <div class="order-status">
+      <span class="status"></span>
+    </div>
+  </section>
 
-      <div class="order-status">
-        <span class="status preparing">Em preparo</span>
-      </div>
-    </section>
-
-  </main>
-
+</main>
 </body>
 </html>
