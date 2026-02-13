@@ -175,6 +175,8 @@ async function updateUser(getUser) {
     const [userResponse] = await Promise.all([
       fetch(getUser)
     ])
+
+    
     if(!userResponse.ok){
       throw new Error("Erro ao buscar usuario");
     }
