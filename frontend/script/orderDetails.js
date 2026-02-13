@@ -6,6 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("ID da comanda não encontrado");
         return;
     }
+        const btnEdit = document.getElementById("btnEdit");
+    if (btnEdit) {
+        btnEdit.addEventListener("click", () => {
+            window.location.href = `../admin/editOrder.html?idOrder=${idOrder}`;
+        });
+    }
 
     const itemsUrl = `http://localhost:8080/order_item/${idOrder}`;
     const clientUrl = `http://localhost:8080/orders/details/${idOrder}`;
@@ -65,6 +71,5 @@ function renderOrder(items, client) {
         orderList.appendChild(li);
     });
 }
-
 
 

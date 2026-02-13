@@ -8,7 +8,6 @@
     <script src="../script/orderDetails.js" defer></script>
 </head>
 <body>
-
     <header class="header">
         <h1>📋 Pedido do Cliente</h1>
         <span class="role">Acesso: Garçom</span>
@@ -26,7 +25,7 @@
             <div class="order-footer">
                 <span id="orderTotal" class="total">Total: R$</span>
                 <button onclick="window.location.href='../admin/order.html'" class="btn-canceled">Cancelar</button>
-                <button class="btn-edit">Editar</button>
+                <div onclick="window.location.href= `../admin/editOrder.html?idorder=${orders.idOrder}`" id="btnEdit" class="btn-edit">Editar</div>
                 <button class="btn-finish">Finalizar Pedido</button>
             </div>
         </section>
