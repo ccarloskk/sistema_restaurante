@@ -165,10 +165,19 @@ document.addEventListener("DOMContentLoaded", () => {
         console.error("ID da comanda não encontrado");
         return;
     }
-    const getUser = `http://localhost:8080/orders/details/${idOrder}`;
 
+    const getUser = `http://localhost:8080/orders/details/${idOrder}`;
     updateUser(getUser);
+
+    const form = document.getElementById("comandaForm");
+
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        await updateOrder(idOrder);
+    });
 });
+
 
 async function updateUser(getUser) {
   try{
@@ -198,6 +207,36 @@ function loadUsers(user) {
   nameClient.value = order.name_customer;
   dateOrder.value = order.date_order.split("T")[0];
   status.value = order.status;
+}
+
+async function updateOrder(idOrder) {
+    try {
+        const nameClient = document.getElementById("nameClient").value;
+        const dateOrder = document.getElementById("dateOrder").value;
+        const status = document.getElementById("status").value;
+
+        const response = await fetch(`http://localhost:8080/orders/${idOrder}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name_customer: nameClient,
+                date_order: dateOrder,
+                status: status
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao atualizar pedido");
+        }
+
+        alert("Pedido atualizado com sucesso!");
+
+    } catch (error) {
+        console.error(error);
+        alert("Erro ao atualizar pedido");
+    }
 }
 
 
