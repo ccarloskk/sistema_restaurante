@@ -1,17 +1,18 @@
 package com.manager_restaurant.restaurant_manager.service;
 
-
-
+import com.manager_restaurant.restaurant_manager.dto.ItemsOrdersDTO;
 import com.manager_restaurant.restaurant_manager.dto.OrdersDTO;
+import com.manager_restaurant.restaurant_manager.dto.UpdateOrderDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.CommandRepository;
+import com.manager_restaurant.restaurant_manager.repository.OrderItemsRepository;
 import com.manager_restaurant.restaurant_manager.repository.OrdersRepository;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
-import org.aspectj.weaver.ast.Or;
+import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -22,11 +23,13 @@ public class OrderService {
     private CommandRepository commandRepository;
     private ProductsRepository productsRepository;
     private OrdersRepository ordersRepository;
+    private OrderItemsRepository orderItemsRepository;
 
-    public OrderService(CommandRepository commandRepository, ProductsRepository productsRepository, OrdersRepository ordersRepository) {
+    public OrderService(CommandRepository commandRepository, ProductsRepository productsRepository, OrdersRepository ordersRepository, OrderItemsRepository orderItemsRepository) {
         this.commandRepository = commandRepository;
         this.productsRepository = productsRepository;
         this.ordersRepository = ordersRepository;
+        this.orderItemsRepository = orderItemsRepository;
     }
 
     public BigDecimal updateTotal(Order order) {
@@ -87,6 +90,50 @@ public class OrderService {
         order.setDate_order(updatedOrder.getDate_order());
         order.setStatus(updatedOrder.getStatus());
         order.setTotal(updatedOrder.getTotal());
+        return commandRepository.save(order);
+    }
+
+    @Transactional
+    public Order updateOrderItems(Long id_order, UpdateOrderDTO dto) {
+
+        Order order = searchOrder(id_order);
+
+        if (dto.getItems() == null || dto.getItems().isEmpty()) {
+            throw new RuntimeException("Lista de itens não pode estar vazia");
+        }
+
+        for (ItemsOrdersDTO itemDTO : dto.getItems()) {
+
+            if (itemDTO.getId_order_item() == null) {
+                throw new RuntimeException("Todos os itens devem possuir id_order_item para atualização");
+            }
+
+            OrderItems existingItem = orderItemsRepository
+                    .findById(itemDTO.getId_order_item())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Item não encontrado: " + itemDTO.getId_order_item()
+                    ));
+
+            // 🔒 Garante que o item pertence ao pedido correto
+            if (!existingItem.getOrder().getId_order().equals(order.getId_order())) {
+                throw new RuntimeException(
+                        "Item " + itemDTO.getId_order_item() + " não pertence ao pedido " + id_order
+                );
+            }
+
+            Products product = productsRepository
+                    .findById(itemDTO.getId_product())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Produto não encontrado: " + itemDTO.getId_product()
+                    ));
+
+            existingItem.setProduct(product);
+            existingItem.setQuantity(itemDTO.getQuantity());
+            existingItem.setNotes(itemDTO.getNotes());
+        }
+
+        order.setTotal(updateTotal(order));
+
         return commandRepository.save(order);
     }
 }

@@ -19,7 +19,6 @@ public class OrderItems {
     @ManyToOne
     @JoinColumn(name = "id_product")
     private Products product;
-
     private int quantity;
     private String notes;
 
@@ -75,4 +74,7 @@ public class OrderItems {
         this.notes = notes;
         return this;
     }
+
+
+
 }

@@ -55,6 +55,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.POST, "/orders/updateTotalPublic").permitAll()
                         .requestMatchers(HttpMethod.POST, "/orders/createOrder").permitAll()
                         .requestMatchers(HttpMethod.PUT, "/orders/{id_order}").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/orders/updateOrder/{id_order}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/orders/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/order_item/details").permitAll()

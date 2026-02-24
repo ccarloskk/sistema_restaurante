@@ -1,6 +1,7 @@
 package com.manager_restaurant.restaurant_manager.controller;
 
 import com.manager_restaurant.restaurant_manager.dto.OrdersDTO;
+import com.manager_restaurant.restaurant_manager.dto.UpdateOrderDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.repository.OrderItemsRepository;
@@ -53,6 +54,11 @@ public class OrderController {
     @PutMapping("/{id_order}")
     public Order updateOrder(@PathVariable("id_order") Long id_order, @RequestBody Order order){
         return orderService.updateOrder(id_order, order);
+    }
+
+    @PutMapping("/updateOrder/{id_order}")
+    public Order updateOrder(@PathVariable Long id_order, @RequestBody UpdateOrderDTO dto) {
+        return orderService.updateOrderItems(id_order, dto);
     }
 
     @DeleteMapping("/{id_order}")

@@ -3,6 +3,7 @@ package com.manager_restaurant.restaurant_manager.service;
 
 import com.manager_restaurant.restaurant_manager.dto.ItensComandasDTO;
 import com.manager_restaurant.restaurant_manager.dto.OrderItemsDTO;
+import com.manager_restaurant.restaurant_manager.dto.UpdateOrderDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.model.Products;
@@ -70,13 +71,13 @@ public class OrderItemsService {
         return orderItemsRepository.seacherWithDetails();
     }
 
-    public OrderItems updateOrderItem(Long id_order_item, OrderItems orderItem) {
-        OrderItems existingItem = searchOrderItem(id_order_item);
-        existingItem.setProduct(orderItem.getProduct());
-        existingItem.setQuantity(orderItem.getQuantity());
-        existingItem.setNotes(orderItem.getNotes());
-        OrderItems updatedItem = orderItemsRepository.save(existingItem);
-        orderService.updateTotal(updatedItem.getOrder());
-        return updatedItem;
-    }
+//    public OrderItems updateOrderItem(UpdateOrderDTO ) {
+//        OrderItems existingItem = searchOrderItem(id_order_item);
+//        existingItem.setProduct(orderItem.getProduct());
+//        existingItem.setQuantity(orderItem.getQuantity());
+//        existingItem.setNotes(orderItem.getNotes());
+//        OrderItems updatedItem = orderItemsRepository.save(existingItem);
+//        orderService.updateTotal(updatedItem.getOrder());
+//        return updatedItem;
+//    }
 }
