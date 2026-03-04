@@ -1,5 +1,6 @@
 package com.manager_restaurant.restaurant_manager.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class Order {
     private BigDecimal total;
 
     @OneToMany(mappedBy = "order")
+    @JsonManagedReference
     private List<OrderItems> OrderItems;
 
 

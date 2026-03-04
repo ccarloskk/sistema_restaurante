@@ -30,7 +30,7 @@ public interface OrderItemsRepository extends JpaRepository<OrderItems, Long> {
 
     @Query("""
         SELECT new com.manager_restaurant.restaurant_manager.dto.OrderItemsDTO(
-            oi.order.name_customer,
+            oi.id_order_item,
             oi.order.id_order,
             oi.product.idProduct,
             oi.product.name_product,
@@ -40,7 +40,7 @@ public interface OrderItemsRepository extends JpaRepository<OrderItems, Long> {
         FROM OrderItems oi
         WHERE oi.order.id_order = :id_order
         GROUP BY
-            oi.order.name_customer,
+            oi.id_order_item,
             oi.order.id_order,
             oi.product.idProduct,
             oi.product.name_product,

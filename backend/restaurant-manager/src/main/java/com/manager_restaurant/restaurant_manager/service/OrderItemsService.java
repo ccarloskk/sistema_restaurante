@@ -3,7 +3,6 @@ package com.manager_restaurant.restaurant_manager.service;
 
 import com.manager_restaurant.restaurant_manager.dto.ItensComandasDTO;
 import com.manager_restaurant.restaurant_manager.dto.OrderItemsDTO;
-import com.manager_restaurant.restaurant_manager.dto.UpdateOrderDTO;
 import com.manager_restaurant.restaurant_manager.model.Order;
 import com.manager_restaurant.restaurant_manager.model.OrderItems;
 import com.manager_restaurant.restaurant_manager.model.Products;

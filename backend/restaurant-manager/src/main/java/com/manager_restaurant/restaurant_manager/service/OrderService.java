@@ -95,45 +95,50 @@ public class OrderService {
 
     @Transactional
     public Order updateOrderItems(Long id_order, UpdateOrderDTO dto) {
-
         Order order = searchOrder(id_order);
-
         if (dto.getItems() == null || dto.getItems().isEmpty()) {
             throw new RuntimeException("Lista de itens não pode estar vazia");
         }
-
         for (ItemsOrdersDTO itemDTO : dto.getItems()) {
-
-            if (itemDTO.getId_order_item() == null) {
-                throw new RuntimeException("Todos os itens devem possuir id_order_item para atualização");
-            }
-
-            OrderItems existingItem = orderItemsRepository
-                    .findById(itemDTO.getId_order_item())
-                    .orElseThrow(() -> new RuntimeException(
-                            "Item não encontrado: " + itemDTO.getId_order_item()
-                    ));
-
-            // 🔒 Garante que o item pertence ao pedido correto
-            if (!existingItem.getOrder().getId_order().equals(order.getId_order())) {
-                throw new RuntimeException(
-                        "Item " + itemDTO.getId_order_item() + " não pertence ao pedido " + id_order
-                );
-            }
-
             Products product = productsRepository
                     .findById(itemDTO.getId_product())
                     .orElseThrow(() -> new RuntimeException(
                             "Produto não encontrado: " + itemDTO.getId_product()
                     ));
+            if (itemDTO.getId_order_item() != null) {
+                OrderItems existingItem = orderItemsRepository
+                        .findById(itemDTO.getId_order_item())
+                        .orElseThrow(() -> new RuntimeException(
+                                "Item não encontrado: " + itemDTO.getId_order_item()
+                        ));
+                if (!existingItem.getOrder().getId_order().equals(order.getId_order())) {
+                    throw new RuntimeException(
+                            "Item " + itemDTO.getId_order_item() + " não pertence ao pedido " + id_order
+                    );
+                }
+                if (itemDTO.getQuantity() == 0) {
+                    order.getOrder_items().remove(existingItem);
+                    orderItemsRepository.delete(existingItem);
+                } else {
+                    existingItem.setProduct(product);
+                    existingItem.setQuantity(itemDTO.getQuantity());
+                    existingItem.setNotes(itemDTO.getNotes());
+                }
+            }
+            else {
+                if (itemDTO.getQuantity() > 0) {
 
-            existingItem.setProduct(product);
-            existingItem.setQuantity(itemDTO.getQuantity());
-            existingItem.setNotes(itemDTO.getNotes());
+                    OrderItems newItem = new OrderItems();
+                    newItem.setOrder(order);
+                    newItem.setProduct(product);
+                    newItem.setQuantity(itemDTO.getQuantity());
+                    newItem.setNotes(itemDTO.getNotes());
+
+                    orderItemsRepository.save(newItem);
+                }
+            }
         }
-
         order.setTotal(updateTotal(order));
-
         return commandRepository.save(order);
     }
 }

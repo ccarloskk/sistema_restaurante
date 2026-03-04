@@ -3,7 +3,7 @@ package com.manager_restaurant.restaurant_manager.dto;
 import java.math.BigDecimal;
 
 public class OrderItemsDTO {
-    private String nameClient;
+    private Long id_order_item;
     private Long id_order;
     private Long id_product;
     private String name_product;
@@ -12,8 +12,8 @@ public class OrderItemsDTO {
 
     public OrderItemsDTO() {}
 
-    public OrderItemsDTO(String nameClient ,Long id_order,Long id_product , String name_product, Long quantity, BigDecimal total) {
-        this.nameClient = nameClient;
+    public OrderItemsDTO(Long id_order_item ,Long id_order,Long id_product , String name_product, Long quantity, BigDecimal total) {
+        this.id_order_item = id_order_item;
         this.id_order = id_order;
         this.id_product = id_product;
         this.name_product = name_product;
@@ -21,12 +21,13 @@ public class OrderItemsDTO {
         this.total = total;
     }
 
-    public String nameClient() {
-        return nameClient;
+    public Long getId_order_item() {
+        return id_order_item;
     }
 
-    public void setNameClient(String nameClient) {
-        this.nameClient = nameClient;
+    public OrderItemsDTO setId_order_item(Long id_order_item) {
+        this.id_order_item = id_order_item;
+        return this;
     }
 
     public Long getId_order() {

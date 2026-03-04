@@ -1,7 +1,7 @@
 package com.manager_restaurant.restaurant_manager.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,10 +10,12 @@ public class OrderItems {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id_order_item;
 
     @ManyToOne
     @JoinColumn(name = "id_order")
+    @JsonBackReference
     private Order order;
 
     @ManyToOne
