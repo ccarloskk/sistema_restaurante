@@ -17,46 +17,55 @@ async function getCardapio() {
     products.forEach((product) => {
       if (!product.idProduct) return;
 
-    let localQty = quantities[product.idProduct] ?? 0;
-    quantities[product.idProduct] = localQty;
+      const id = Number(product.idProduct);
 
-    const item = document.createElement("div");
-    item.classList.add("products-item");
-
-    item.innerHTML = `
-      <h3 class="name-products">${product.name_product}</h3>
-      <h4 class="describe">${product.description_product || ""}</h4>
-      <p class="price">R$ ${Number(product.price_product).toFixed(2)}</p>
-
-      <div class="quantity-control">
-        <button type="button" class="decrease">-</button>
-        <span class="quantity">${localQty}</span>
-        <button type="button" class="increase">+</button>
-      </div>
-    `;
-
-    const quantitySpan = item.querySelector(".quantity");
-    const increaseBtn = item.querySelector(".increase");
-    const decreaseBtn = item.querySelector(".decrease");
-
-    increaseBtn.addEventListener("click", () => {
-      localQty++;
-      quantitySpan.textContent = localQty;
-      quantities[product.idProduct] = localQty;
-      updateSumTotal();
-    });
-
-    decreaseBtn.addEventListener("click", () => {
-      if (localQty > 0) {
-        localQty--;
-        quantitySpan.textContent = localQty;
-        quantities[product.idProduct] = localQty;
-        updateSumTotal();
+      // Agora nunca sobrescreve item existente
+      if (!quantities[id]) {
+        quantities[id] = {
+          quantity: 0,
+          id_order_item: null
+        };
       }
-    });
+
+      let localQty = quantities[id].quantity;
+
+      const item = document.createElement("div");
+      item.classList.add("products-item");
+
+      item.innerHTML = `
+        <h3 class="name-products">${product.name_product}</h3>
+        <h4 class="describe">${product.description_product || ""}</h4>
+        <p class="price">R$ ${Number(product.price_product).toFixed(2)}</p>
+        <div class="quantity-control">
+          <button type="button" class="decrease">-</button>
+          <span class="quantity">${localQty}</span>
+          <button type="button" class="increase">+</button>
+        </div>
+      `;
+
+      const quantitySpan = item.querySelector(".quantity");
+      const increaseBtn = item.querySelector(".increase");
+      const decreaseBtn = item.querySelector(".decrease");
+
+      increaseBtn.addEventListener("click", () => {
+        localQty++;
+        quantitySpan.textContent = localQty;
+        quantities[id].quantity = localQty;
+        updateSumTotal();
+      });
+
+      decreaseBtn.addEventListener("click", () => {
+        if (localQty > 0) {
+          localQty--;
+          quantitySpan.textContent = localQty;
+          quantities[id].quantity = localQty;
+          updateSumTotal();
+        }
+      });
 
       container.appendChild(item);
     });
+
   } catch (err) {
     console.error("Erro ao carregar cardápio:", err);
   }
@@ -74,9 +83,9 @@ function formatBRLNumber(value) {
 async function updateSumTotal() {
   try {
     const body = Object.entries(quantities)
-      .filter(([, qty]) => qty > 0)
-      .map(([id, qty]) => ({
-        quantity: qty,
+      .filter(([, data]) => data.quantity > 0)
+      .map(([id, data]) => ({
+        quantity: data.quantity,
         product: { idProduct: Number(id) },
       }));
 
@@ -113,7 +122,6 @@ function hojeYYYYMMDDLocal() {
 
 function marcarDataDeHojeAutomatico() {
   const hoje = hojeYYYYMMDDLocal();
-
   document
     .querySelectorAll('input[type="date"][data-default-today]')
     .forEach((input) => {
@@ -123,26 +131,6 @@ function marcarDataDeHojeAutomatico() {
       });
     });
 }
-
-document.addEventListener("DOMContentLoaded", async () => {
-  marcarDataDeHojeAutomatico();
-
-  const params = new URLSearchParams(window.location.search);
-  const idOrder = params.get("idOrder");
-
-  if (idOrder) {
-  await getOrderItems(idOrder);
-  }
-
-  await getCardapio();
-  await updateSumTotal();
-
-  const form = document.getElementById("comandaForm");
-  form.addEventListener("submit", handleSubmitComanda);
-});
-
-const params = new URLSearchParams(window.location.search);
-const idOrder = params.get("idOrder");
 
 async function getOrderItems(idOrder) {
   try {
@@ -155,61 +143,31 @@ async function getOrderItems(idOrder) {
     if (!response.ok) throw new Error("Erro ao buscar pedido");
 
     const items = await response.json();
+    console.log("Resposta crua do backend:", items);
 
     Object.keys(quantities).forEach(key => delete quantities[key]);
 
     items.forEach(item => {
-      quantities[item.id_product] = item.quantity;
-    });
+      const id = Number(item.id_product);
 
-    console.log(items)
+      quantities[id] = {
+        quantity: item.quantity,
+        id_order_item: item.id_order_item
+      };
+    });
 
   } catch (err) {
     console.error("Erro ao buscar itens do pedido:", err);
   }
 }
 
-function handleSubmitComanda(e) {
-  e.preventDefault();
-}
-
-////////////////////////
-document.addEventListener("DOMContentLoaded", () => {
-    const params = new URLSearchParams(window.location.search);
-    const idOrder = params.get("idOrder");
-
-    if (!idOrder) {
-        console.error("ID da comanda não encontrado");
-        return;
-    }
-
-    const getUser = `http://localhost:8080/orders/details/${idOrder}`;
-    updateUser(getUser);
-
-    const form = document.getElementById("comandaForm");
-
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        await updateOrder(idOrder);
-    });
-});
-
-
 async function updateUser(getUser) {
-  try{
-    const [userResponse] = await Promise.all([
-      fetch(getUser)
-    ])
-
-    
-    if(!userResponse.ok){
-      throw new Error("Erro ao buscar usuario");
-    }
-    const user = await userResponse.json();
-
-    loadUsers(user)
-  }catch(error){
+  try {
+    const response = await fetch(getUser);
+    if (!response.ok) throw new Error("Erro ao buscar usuario");
+    const user = await response.json();
+    loadUsers(user);
+  } catch (error) {
     console.log(error);
   }
 }
@@ -218,48 +176,112 @@ function loadUsers(user) {
   const nameClient = document.getElementById("nameClient");
   const dateOrder = document.getElementById("dateOrder");
   const status = document.getElementById("status");
+  const total = document.getElementById("total");
 
   const order = user[0];
 
   nameClient.value = order.name_customer;
   dateOrder.value = order.date_order.split("T")[0];
   status.value = order.status;
+  total.value = order.total;
 }
 
 async function updateOrder(idOrder) {
-    try {
-        const nameClient = document.getElementById("nameClient").value;
-        const dateOrder = document.getElementById("dateOrder").value;
-        const status = document.getElementById("status").value;
+  try {
+    const nameClient = document.getElementById("nameClient").value;
+    const dateOrder = document.getElementById("dateOrder").value;
+    const status = document.getElementById("status").value;
+    const total = document.getElementById("total").value;
 
-        const response = await fetch(`http://localhost:8080/orders/${idOrder}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name_customer: nameClient,
-                date_order: dateOrder,
-                status: status
-            })
-        });
+    const response = await fetch(`http://localhost:8080/orders/${idOrder}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name_customer: nameClient,
+        date_order: dateOrder,
+        status: status,
+        total: total
+      })
+    });
 
-        if (!response.ok) {
-            throw new Error("Erro ao atualizar pedido");
-        }
+    if (!response.ok) throw new Error("Erro ao atualizar pedido");
 
-        alert("Pedido atualizado com sucesso!");
+    alert("Pedido atualizado com sucesso!");
 
-    } catch (error) {
-        console.error(error);
-        alert("Erro ao atualizar pedido");
+  } catch (error) {
+    console.error(error);
+    alert("Erro ao atualizar pedido");
+  }
+}
+async function updateOrderItem(idOrder) {
+  try {
+
+
+    const items = Object.entries(quantities)
+      .filter(([, data]) => {
+        if (data.id_order_item != null) return true;
+        if (data.id_order_item == null && data.quantity > 0) return true;
+        return false;
+      })
+      .map(([idProduct, data]) => ({
+        id_order_item: data.id_order_item ?? null,
+        id_product: Number(idProduct),
+        quantity: data.quantity,
+        notes: data.notes ?? ""
+      }));
+
+    const response = await fetch(
+      `http://localhost:8080/orders/updateOrder/${idOrder}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          ...(token ? { Authorization: `Bearer ${token}` } : {})
+        },
+        body: JSON.stringify({
+          id_order: Number(idOrder),
+          items: items
+        })
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Erro ao atualizar pedido");
     }
+
+    const result = await response.json();
+    console.log("Pedido atualizado com sucesso:", result);
+
+  } catch (error) {
+    console.error("Erro ao atualizar pedido:", error);
+  }
 }
 
+document.addEventListener("DOMContentLoaded", async () => {
+  marcarDataDeHojeAutomatico();
 
+  const params = new URLSearchParams(window.location.search);
+  const idOrder = params.get("idOrder");
 
+  if (!idOrder) {
+    console.error("ID da comanda não encontrado");
+    return;
+  }
 
+  await getOrderItems(idOrder);
+  await getCardapio();
+  await updateSumTotal();
 
+  const getUser = `http://localhost:8080/orders/details/${idOrder}`;
+  await updateUser(getUser);
 
+  const form = document.getElementById("comandaForm");
 
-
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    await updateOrder(idOrder);
+    await updateOrderItem(idOrder);
+  });
+});

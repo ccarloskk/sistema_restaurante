@@ -26,35 +26,28 @@
         <div id="form" class="form-section">
           <h2>Nosso Cardápio</h2>
           <form id="orderForm">
-            <div class="products-grid">
-              <div class="products-item">
-                <h3 class="name-products" data-id=""></h3>
-                <p class="describe"></p>
-                <p class="price">R$</p>
-                <div class="quantity-control">
-                  <button type="button" class="decrease">-</button>
-                  <span class="quantity">0</span>
-                  <button type="button" class="increase">+</button>
-                </div>
-              </div>
-            </div>
+            <div id="products-container"></div>
             <div class="order-summary">
               <h3>Seu Pedido</h3>
               <div id="itensSelecionados"></div>
-              <p class="total" id="total">Total: R$ <span id="totalOrder"></span></p>
+              <p class="total">
+                Total: R$ <span id="totalOrder">0,00</span>
+              </p>
             </div>            
-            
+                
             <div class="dados-cliente">
               <h3>Seus Dados</h3>
-              <label for="nome">Nome:</label>
-              <input type="text" id="customerName" name="nome" required />
-              <label for="Consumo">Forma de consumo:</label>
+              <label>Nome:</label>
+              <input type="text" id="customerName" required />
+
+              <label>Forma de consumo:</label>
               <select class="formaConsumo">
-                        <option value="local">Local</option>
-                        <option value="retirada">Retirada</option>
+                <option value="local">Local</option>
+                <option value="retirada">Retirada</option>
               </select>
-              <label for="telefone">Telefone:</label>
-              <input type="tel" id="phone" name="telefone" required />
+
+              <label>Telefone:</label>
+              <input type="tel" id="phone" required />
             </div>
 
             <input id="sendButton" type="submit" value="Finalizar Pedido" />
