@@ -10,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductsRepository extends JpaRepository <Products, Long  > {
-    List<Products> findAllByStatusTrue();
-    @Query("select p from Products p where p.idProduct = :id and p.status = true")
-    Optional<Products> findActiveById(@Param("id") Long idProduct);
+public interface ProductsRepository extends JpaRepository<Products, Long> {
+
     List<Products> findByStatusTrue();
+
+    Optional<Products> findByIdProductAndStatusTrue(Long idProduct);
 }

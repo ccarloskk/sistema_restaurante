@@ -5,7 +5,6 @@ import com.manager_restaurant.restaurant_manager.dto.AuthenticationDTO;
 import com.manager_restaurant.restaurant_manager.dto.RegisterDTO;
 import com.manager_restaurant.restaurant_manager.model.Users;
 import com.manager_restaurant.restaurant_manager.repository.UserRepository;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

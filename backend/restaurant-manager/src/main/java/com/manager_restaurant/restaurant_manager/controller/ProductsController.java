@@ -1,10 +1,6 @@
 package com.manager_restaurant.restaurant_manager.controller;
-
-
-import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
-import com.manager_restaurant.restaurant_manager.service.ProductsMapper;
 import com.manager_restaurant.restaurant_manager.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +14,14 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 public class ProductsController {
 
-    private final ProductsMapper productsMapper;
-
     @Autowired
     private final ProductsService productsService;
 
     @Autowired
     private ProductsRepository productsRepository;
 
-    public ProductsController(ProductsService productsService, ProductsMapper productsMapper) {
+    public ProductsController(ProductsService productsService) {
         this.productsService = productsService;
-        this.productsMapper = productsMapper;
     }
 
     @GetMapping("/admin/menu")
@@ -60,11 +53,9 @@ public class ProductsController {
         return productsService.createProduct(product);
     }
 
-    @PutMapping("/{idProduct}")
-    public ProductsDTO updateProduct(@PathVariable Long idProduct, @RequestBody ProductsDTO  product){
-        Products toUpdate = productsMapper.toEntity(product);
-        Products updated = productsService.updateProduct(idProduct, toUpdate);
-        return productsMapper.toResponseDTO(updated);
+    @PutMapping("/update/{idProduct}")
+    public Products updateProduct(@PathVariable Long idProduct, @RequestBody Products product){
+        return productsService.updateProduct(idProduct, product);
     }
 
     @PatchMapping("/{idProduct}/destatus")

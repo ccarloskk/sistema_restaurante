@@ -6,8 +6,6 @@ import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class ProductsService {
 
