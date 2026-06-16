@@ -1,10 +1,13 @@
 package com.manager_restaurant.restaurant_manager.service;
 
 
+import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ProductsService {
@@ -13,7 +16,7 @@ public class ProductsService {
 
     @Transactional
     public void destatusProduct(Long idProduct) {
-        Products product = searchProduct(idProduct);
+        Products product = searchProductId(idProduct);
         product.setStatus(false);
     }
 
@@ -21,9 +24,17 @@ public class ProductsService {
         this.productsRepository = productsRepository;
     }
 
-    public Products searchProduct(Long idProduct) {
+    public Products searchProductId(Long idProduct) {
         return productsRepository.findById(idProduct)
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado ou inativo"));
+    }
+
+    public List<Products> getAllProducts() {
+        return productsRepository.findAll();
+    }
+
+    public List<Products> getActiveProducts() {
+        return productsRepository.findByStatusTrue();
     }
 
     public Products createProduct(Products product) {
@@ -35,7 +46,7 @@ public class ProductsService {
     }
 
     public Products updateProduct(Long idProduct, Products updatedProduct) {
-        Products product = searchProduct(idProduct);
+        Products product = searchProductId(idProduct);
         product.setName_product(updatedProduct.getName_product());
         product.setDescription_product(updatedProduct.getDescription_product());
         product.setCategory_products(updatedProduct.getCategory_products());

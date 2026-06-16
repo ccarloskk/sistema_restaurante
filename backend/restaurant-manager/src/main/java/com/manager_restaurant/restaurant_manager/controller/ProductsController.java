@@ -17,35 +17,23 @@ public class ProductsController {
     @Autowired
     private final ProductsService productsService;
 
-    @Autowired
-    private ProductsRepository productsRepository;
-
     public ProductsController(ProductsService productsService) {
         this.productsService = productsService;
     }
 
-    @GetMapping("/admin/menu")
+    @GetMapping("/menu/admin")
     public List<Products> getAdminMenu() {
-        return productsRepository.findAll().stream()
-                .map(p -> new Products(p.getIdProduct(), p.getName_product(), p.getDescription_product(), p.getCategory_products(), p.getPrice_product(), p.getStatus()))
-                .collect(Collectors.toList());
+        return productsService.getAllProducts();
     }
 
     @GetMapping("/menu")
     public List<Products> getMenu() {
-        return productsRepository.findByStatusTrue().stream()
-                .map(p -> new Products(p.getIdProduct(), p.getName_product(), p.getDescription_product(), p.getCategory_products(), p.getPrice_product(), p.getStatus()))
-                .collect(Collectors.toList());
+        return productsService.getActiveProducts();
     }
 
     @GetMapping("/{idProduct}")
-    public ResponseEntity<Products> getProductById(@PathVariable Long idProduct) {
-        return productsRepository.findById(idProduct)
-                .map(produto -> ResponseEntity.ok(
-                        new Products (produto.getIdProduct(), produto.getName_product(), produto.getDescription_product(), produto.getCategory_products(), produto.getPrice_product(), produto.getStatus()
-                        )
-                ))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public Products getProductById(@PathVariable Long idProduct) {
+        return productsService.searchProductId(idProduct);
     }
 
     @PostMapping("/create")
