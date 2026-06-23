@@ -40,13 +40,8 @@ public class ProductsController {
     }
 
     @PutMapping("/update/{idProduct}")
-    public Products updateProduct(@PathVariable Long idProduct, @RequestBody Products product){
-        return productsService.updateProduct(idProduct, product);
+    public ProductsDTO updateProduct(@PathVariable Long idProduct, @RequestBody ProductsDTO productsDTO){
+        return productsService.updateProduct(idProduct, productsDTO);
     }
 
-    @PatchMapping("/{idProduct}/destatus")
-    public ResponseEntity<Void> destatusProduct(@PathVariable Long idProduct) {
-        productsService.destatusProduct(idProduct);
-        return ResponseEntity.noContent().build();
-    }
 }

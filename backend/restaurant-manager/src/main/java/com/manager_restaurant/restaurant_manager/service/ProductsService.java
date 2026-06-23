@@ -71,13 +71,22 @@ public class ProductsService {
         productsRepository.deleteById(idProduct);
     }
 
-    public Products updateProduct(Long idProduct, Products updatedProduct) {
+    public ProductsDTO updateProduct(Long idProduct, ProductsDTO productsDTO) {
         Products product = searchProductId(idProduct);
-        product.setName_product(updatedProduct.getName_product());
-        product.setDescription_product(updatedProduct.getDescription_product());
-        product.setCategory_products(updatedProduct.getCategory_products());
-        product.setPrice_product(updatedProduct.getPrice_product());
-        product.setStatus(updatedProduct.getStatus());
-        return productsRepository.save(product);
+        product.setName_product(productsDTO.getName_product());
+        product.setDescription_product(productsDTO.getDescription_product());
+        product.setCategory_products(productsDTO.getCategory_products());
+        product.setPrice_product(productsDTO.getPrice_product());
+        product.setStatus(productsDTO.getStatusProduct());
+
+        Products updatedProduct = productsRepository.save(product);
+        return new ProductsDTO(
+                updatedProduct.getIdProduct(),
+                updatedProduct.getName_product(),
+                updatedProduct.getDescription_product(),
+                updatedProduct.getStatus(),
+                updatedProduct.getCategory_products(),
+                updatedProduct.getPrice_product()
+        );
     }
 }

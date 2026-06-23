@@ -47,7 +47,7 @@ public class SecurityConfiguration {
                         .requestMatchers(HttpMethod.GET, "/products/menu").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/{idProduct}").permitAll()
                         .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/products/{idProduct}").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/products/update/{idProduct}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/products/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/orders/details/{id_order}").permitAll()
