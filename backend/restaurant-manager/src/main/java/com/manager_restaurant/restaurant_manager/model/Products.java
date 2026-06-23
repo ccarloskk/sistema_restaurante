@@ -1,6 +1,5 @@
 package com.manager_restaurant.restaurant_manager.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import java.math.BigDecimal;

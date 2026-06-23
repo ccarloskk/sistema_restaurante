@@ -1,6 +1,5 @@
 package com.manager_restaurant.restaurant_manager.service;
 
-
 import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
@@ -37,8 +36,27 @@ public class ProductsService {
         return productsRepository.findByStatusTrue();
     }
 
-    public Products createProduct(Products product) {
-        return productsRepository.save(product);
+    public ProductsDTO createProduct(ProductsDTO productsDTO) {
+        Products product = new Products();
+
+        product.setName_product(productsDTO.getName_product());
+        product.setDescription_product(productsDTO.getDescription_product());
+        product.setCategory_products(productsDTO.getCategory_products());
+        product.setPrice_product(productsDTO.getPrice_product());
+        product.setStatus(
+                productsDTO.getStatusProduct() != null ? productsDTO.getStatusProduct() : true
+        );
+
+        Products savedProduct = productsRepository.save(product);
+
+        return new ProductsDTO(
+                savedProduct.getIdProduct(),
+                savedProduct.getName_product(),
+                savedProduct.getDescription_product(),
+                savedProduct.getStatus(),
+                savedProduct.getCategory_products(),
+                savedProduct.getPrice_product()
+        );
     }
 
     public void deleteProduct(Long idProduct) {

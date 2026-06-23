@@ -1,13 +1,11 @@
 package com.manager_restaurant.restaurant_manager.controller;
+import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
-import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import com.manager_restaurant.restaurant_manager.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
@@ -37,7 +35,7 @@ public class ProductsController {
     }
 
     @PostMapping("/create")
-    public Products createProduct(@RequestBody Products product){
+    public ProductsDTO createProduct(@RequestBody ProductsDTO product){
         return productsService.createProduct(product);
     }
 

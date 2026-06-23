@@ -1,77 +1,46 @@
 package com.manager_restaurant.restaurant_manager.dto;
 
+import java.math.BigDecimal;
+
 public class ProductsDTO {
 
     private Long idProduct;
-    private String nameProduct;
-    private String descriptionProduct;
-    private String categoryProducts;
-    private String priceProduct;
+    private String name_product;
+    private String description_product;
+    private String category_products;
+    private BigDecimal price_product;
     private Boolean statusProduct;
 
-    public ProductsDTO() {
-    }
-
-    public ProductsDTO(Long idProduct, String nameProduct, String descriptionProduct, String categoryProducts, String priceProduct, Boolean statusProduct) {
+    public ProductsDTO(Long idProduct, String nameProduct, String descriptionProduct, Boolean status, String categoryProducts, BigDecimal priceProduct) {
         this.idProduct = idProduct;
-        this.nameProduct = nameProduct;
-        this.descriptionProduct = descriptionProduct;
-        this.categoryProducts = categoryProducts;
-        this.priceProduct = priceProduct;
-        this.statusProduct = statusProduct;
+        this.name_product = nameProduct;
+        this.description_product = descriptionProduct;
+        this.statusProduct = status;
+        this.category_products = categoryProducts;
+        this.price_product = priceProduct;
     }
 
     public Long getIdProduct() {
         return idProduct;
     }
 
-    public ProductsDTO setIdProduct(Long idProduct) {
-        this.idProduct = idProduct;
-        return this;
+    public String getName_product() {
+        return name_product;
     }
 
-    public String getNameProduct() {
-        return nameProduct;
+    public String getDescription_product() {
+        return description_product;
     }
 
-    public ProductsDTO setNameProduct(String nameProduct) {
-        this.nameProduct = nameProduct;
-        return this;
+    public String getCategory_products() {
+        return category_products;
     }
 
-    public String getDescriptionProduct() {
-        return descriptionProduct;
-    }
-
-    public ProductsDTO setDescriptionProduct(String descriptionProduct) {
-        this.descriptionProduct = descriptionProduct;
-        return this;
-    }
-
-    public String getCategoryProducts() {
-        return categoryProducts;
-    }
-
-    public ProductsDTO setCategoryProducts(String categoryProducts) {
-        this.categoryProducts = categoryProducts;
-        return this;
-    }
-
-    public String getPriceProduct() {
-        return priceProduct;
-    }
-
-    public ProductsDTO setPriceProduct(String priceProduct) {
-        this.priceProduct = priceProduct;
-        return this;
+    public BigDecimal getPrice_product() {
+        return price_product;
     }
 
     public Boolean getStatusProduct() {
         return statusProduct;
-    }
-
-    public ProductsDTO setStatusProduct(Boolean statusProduct) {
-        this.statusProduct = statusProduct;
-        return this;
     }
 }
