@@ -25,7 +25,7 @@ public class ProductsController {
     }
 
     @GetMapping("/menu")
-    public List<Products> getMenu() {
+    public List<ProductsDTO> getMenu() {
         return productsService.getActiveProducts();
     }
 

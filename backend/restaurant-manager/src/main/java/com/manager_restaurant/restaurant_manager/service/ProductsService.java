@@ -32,10 +32,18 @@ public class ProductsService {
         return productsRepository.findAll();
     }
 
-    public List<Products> getActiveProducts() {
-        return productsRepository.findByStatusTrue();
+    public List<ProductsDTO> getActiveProducts() {
+        return productsRepository.findByStatusTrue().stream()
+                .map(product -> new ProductsDTO(
+                        product.getIdProduct(),
+                        product.getName_product(),
+                        product.getDescription_product(),
+                        product.getStatus(),
+                        product.getCategory_products(),
+                        product.getPrice_product()
+                ))
+                .toList();
     }
-
     public ProductsDTO createProduct(ProductsDTO productsDTO) {
         Products product = new Products();
 
