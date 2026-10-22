@@ -1,0 +1,217 @@
+.hero-section {
+  display: grid;
+  min-height: 545px;
+  grid-template-columns: 0.95fr 1.05fr;
+  align-items: center;
+  gap: clamp(32px, 7vw, 100px);
+  padding: 62px clamp(24px, 9vw, 136px);
+  background:
+    radial-gradient(
+      ellipse at 10% 95%,
+      rgb(224 190 122 / 20%),
+      transparent 35%
+    ),
+    var(--cream-deep);
+  overflow: hidden;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-copy h1 {
+  margin: 0;
+  color: var(--green);
+  font: 700 clamp(46px, 5.7vw, 76px)/1.02 var(--serif);
+  letter-spacing: -2.8px;
+}
+
+.hero-copy h1 em {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.hero-text {
+  max-width: 430px;
+  margin: 21px 0 25px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.75;
+}
+
+.location-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin: 0 0 26px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.restaurant-card {
+  max-width: 440px;
+  justify-self: end;
+  padding: clamp(24px, 4vw, 38px);
+  border: 1px solid #e7cb70;
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 12px 12px 0 var(--ochre-light);
+}
+
+.restaurant-card .eyebrow {
+  margin-bottom: 9px;
+}
+
+.restaurant-card h2 {
+  margin: 0 0 9px;
+  color: var(--green);
+  font: 700 26px/1.2 var(--serif);
+}
+
+.restaurant-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.restaurant-rating {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 19px 0;
+  padding: 15px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--green);
+  text-decoration: none;
+}
+
+.restaurant-rating strong {
+  color: var(--green);
+  font: 700 30px/1 var(--serif);
+}
+
+.restaurant-rating span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.restaurant-details {
+  display: grid;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.restaurant-details li {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.restaurant-details strong {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--green);
+  font-size: 11px;
+}
+
+.restaurant-details a {
+  color: inherit;
+  text-decoration-color: var(--terracotta);
+  text-underline-offset: 3px;
+}
+
+.restaurant-details a:hover {
+  color: var(--green);
+}
+
+.feature-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  padding: 24px clamp(24px, 9vw, 136px);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 14px;
+}
+
+.feature-icon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--cream-deep);
+  font-size: 19px;
+}
+
+.feature-item strong, .feature-item span {
+  display: block;
+}
+
+.feature-item strong {
+  color: var(--green);
+  font-size: 13px;
+}
+
+.feature-item span {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+@media (max-width: 980px) {
+
+  .hero-section {
+    padding-right: 7vw;
+    padding-left: 7vw;
+  }
+}
+
+@media (max-width: 680px) {
+
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    padding: 46px 22px 40px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(48px, 12vw, 65px);
+  }
+
+  .restaurant-card {
+    justify-self: stretch;
+    padding: 21px;
+    box-shadow: 8px 8px 0 var(--ochre-light);
+  }
+
+  .feature-strip {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 14px 20px;
+  }
+
+  .feature-item {
+    padding: 7px 2px;
+  }
+}

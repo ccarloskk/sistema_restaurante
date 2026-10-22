@@ -1,0 +1,111 @@
+.menu-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--white);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgb(35 51 36 / 10%);
+}
+
+.dish-label {
+  display: flex;
+  min-height: 74px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px;
+  background: var(--cream-deep);
+}
+
+.dish-label strong {
+  color: var(--green);
+  font: 700 15px/1.2 var(--serif);
+}
+
+.dish-label small {
+  flex: 0 0 auto;
+  padding: 6px 9px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--green);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.dish-info {
+  padding: 15px 15px 14px;
+}
+
+.dish-info h3 {
+  margin: 0 0 7px;
+  color: var(--green);
+  font: 700 17px/1.25 var(--serif);
+}
+
+.dish-info p {
+  min-height: 51px;
+  margin: 0 0 13px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.dish-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dish-bottom strong {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+.add-button {
+  display: inline-flex;
+  min-height: 35px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 10px;
+  border: 1px solid var(--green);
+  border-radius: 7px;
+  background: transparent;
+  color: var(--green);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.add-button:hover {
+  background: var(--green);
+  color: white;
+}
+
+@media (max-width: 680px) {
+
+  .dish-info {
+    padding: 12px 11px;
+  }
+
+  .dish-info h3 {
+    font-size: 15px;
+  }
+
+  .dish-info p {
+    min-height: 67px;
+    font-size: 10px;
+  }
+
+  .add-button {
+    min-height: 33px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+}
