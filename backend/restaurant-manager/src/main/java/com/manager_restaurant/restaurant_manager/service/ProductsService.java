@@ -3,7 +3,6 @@ package com.manager_restaurant.restaurant_manager.service;
 import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,12 +11,6 @@ import java.util.List;
 public class ProductsService {
 
     private ProductsRepository productsRepository;
-
-    @Transactional
-    public void destatusProduct(Long idProduct) {
-        Products product = searchProductId(idProduct);
-        product.setStatus(false);
-    }
 
     public ProductsService(ProductsRepository productsRepository) {
         this.productsRepository = productsRepository;

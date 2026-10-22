@@ -3,7 +3,6 @@ import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.service.ProductsService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -44,4 +43,8 @@ public class ProductsController {
         return productsService.updateProduct(idProduct, productsDTO);
     }
 
+    @DeleteMapping("/delete/{idProduct}")
+    public void deleteProduct(@PathVariable Long idProduct){
+        productsService.deleteProduct(idProduct);
+    }
 }
