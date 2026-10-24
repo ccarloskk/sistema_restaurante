@@ -71,7 +71,10 @@ public class SecurityConfiguration {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of(
-                "https://www.estacaoparaense.com.br"
+                "https://www.estacaoparaense.com.br",
+                "http://localhost:3000",
+                "http://localhost:5173",
+                "http://localhost:8080"
         ));
         config.setAllowedMethods(List.of(
                 "GET", "POST", "PUT", "DELETE", "OPTIONS"
