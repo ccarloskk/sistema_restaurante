@@ -8,7 +8,7 @@ import { createWhatsAppLink, restaurant } from "./data/restaurant";
 
 function App() {
   const [route, setRoute] = useState(
-    window.location.hash.replace("#/", "") || "inicio",
+    window.location.hash.replace("/", "") || "inicio",
   );
   const [items, setItems] = useState([]);
   const [menuLoading, setMenuLoading] = useState(true);
@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     const onHashChange = () =>
-      setRoute(window.location.hash.replace("#/", "") || "inicio");
+      setRoute(window.location.hash.replace("/", "") || "inicio");
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
@@ -158,8 +158,10 @@ function App() {
           onClick={() => setCartOpen(true)}
           aria-label={`Abrir carrinho com ${cartCount} itens`}
         >
-          <span className="cart-icon" aria-hidden="true">＋</span> Meu pedido{" "}
-          <span className="cart-count">{cartCount}</span>
+          <span className="cart-icon" aria-hidden="true">
+            ＋
+          </span>{" "}
+          Meu pedido <span className="cart-count">{cartCount}</span>
         </button>
       </header>
       <main>{pages[route] || pages.inicio}</main>
@@ -172,9 +174,7 @@ function App() {
           </div>
         </div>
         <div>
-          <small>
-            {restaurant.address}
-          </small>
+          <small>{restaurant.address}</small>
         </div>
         <div>
           <small>
@@ -183,7 +183,9 @@ function App() {
         </div>
         <a
           className="footer-order"
-          href={createWhatsAppLink(`Olá! Gostaria de saber mais sobre o cardápio da ${restaurant.name}.`)}
+          href={createWhatsAppLink(
+            `Olá! Gostaria de saber mais sobre o cardápio da ${restaurant.name}.`,
+          )}
           target="_blank"
           rel="noreferrer"
         >
