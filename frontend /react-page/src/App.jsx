@@ -8,7 +8,7 @@ import { createWhatsAppLink, restaurant } from "./data/restaurant";
 
 function App() {
   const [route, setRoute] = useState(
-    window.location.hash.replace("/", "") || "inicio",
+    window.location.hash.replace("#/", "") || "inicio",
   );
   const [items, setItems] = useState([]);
   const [menuLoading, setMenuLoading] = useState(true);
@@ -44,7 +44,7 @@ function App() {
 
   useEffect(() => {
     const onHashChange = () =>
-      setRoute(window.location.hash.replace("/", "") || "inicio");
+      setRoute(window.location.hash.replace("#/", "") || "inicio");
     window.addEventListener("hashchange", onHashChange);
     return () => window.removeEventListener("hashchange", onHashChange);
   }, []);
