@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import CartDrawer from "./components/CartDrawer";
 import { formatPrice, menuItems } from "./data/menu";
+import AdminPage from "./admin/AdminPage";
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
 import { createWhatsAppLink, restaurant } from "./data/restaurant";
@@ -123,7 +124,18 @@ function App() {
         onAdd={addToCart}
       />
     ),
+    admin: <AdminPage />,
   };
+
+  if (route === "admin") {
+    return (
+      <div className="app-shell admin-shell">
+        <main>
+          <AdminPage />
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="app-shell">

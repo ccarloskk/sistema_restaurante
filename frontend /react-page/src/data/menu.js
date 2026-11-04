@@ -1,6 +1,7 @@
 const apiBaseUrl = (
   import.meta.env.VITE_API_URL ||
-  "https://backend-production-e37b.up.railway.app"
+  // "https://backend-production-e37b.up.railway.app"
+  "http://localhost:8080"
 ).replace(/\/$/, "");
 
 export const menuItems = async () => {
@@ -42,7 +43,7 @@ export const menuItems = async () => {
 
 export const categories = [
   "Todos",
-  "Entradas",
+  "Produtos",
   "Principais",
   "Sobremesas",
   "Bebidas",
