@@ -13,3 +13,7 @@ export function getProductPrice(product) {
 export function getProductCategory(product) {
   return product.category_products ?? product.category ?? "";
 }
+
+export function getProductStatus(product) {
+  return product.statusProduct ?? product.status ?? true;
+}

@@ -4,6 +4,7 @@ import {
   getProductDescription,
   getProductName,
   getProductPrice,
+  getProductStatus,
 } from "./productUtils";
 import "./ProductList.css";
 
@@ -51,6 +52,7 @@ function ProductList({
     <div className="admin-product-list">
       {products.map((product, index) => {
         const productId = product.idProduct ?? product.id;
+        const isActive = getProductStatus(product);
         return (
           <article
             className="admin-product-card"
@@ -63,10 +65,10 @@ function ProductList({
                 </span>
                 <span
                   className={`admin-product-status ${
-                    product.status === false ? "inactive" : "active"
+                    isActive ? "active" : "inactive"
                   }`}
                 >
-                  {product.status === false ? "Inativo" : "Ativo"}
+                  {isActive ? "Ativo" : "Inativo"}
                 </span>
               </div>
               <h2>{getProductName(product)}</h2>

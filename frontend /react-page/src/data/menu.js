@@ -1,8 +1,9 @@
 const apiBaseUrl = (
   import.meta.env.VITE_API_URL ||
-  // "https://backend-production-e37b.up.railway.app"
-  "http://localhost:8080"
-).replace(/\/$/, "");
+  "https://backend-production-e37b.up.railway.app"
+)
+  // "http://localhost:8080"
+  .replace(/\/$/, "");
 
 export const menuItems = async () => {
   const response = await fetch(`${apiBaseUrl}/products/menu`);

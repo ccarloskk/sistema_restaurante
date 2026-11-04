@@ -1,5 +1,5 @@
-// const API_URL = "https://backend-production-e37b.up.railway.app";
-const API_URL = "http://localhost:8080";
+const API_URL = "https://backend-production-e37b.up.railway.app";
+// const API_URL = "http://localhost:8080";
 // GET: Buscar todos os produtos do menu
 
 export async function buscarProdutos() {

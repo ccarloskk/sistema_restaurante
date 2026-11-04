@@ -15,6 +15,7 @@ import {
   getProductDescription,
   getProductName,
   getProductPrice,
+  getProductStatus,
 } from "./productUtils";
 import "./AdminPage.css";
 
@@ -106,7 +107,7 @@ function AdminPage() {
       description_product: getProductDescription(product),
       price_product: String(getProductPrice(product)),
       category_products: getProductCategory(product),
-      status: product.status ?? true,
+      status: getProductStatus(product),
     });
     setError("");
   };
@@ -128,7 +129,7 @@ function AdminPage() {
       description_product: form.description_product.trim(),
       price_product: price,
       category_products: form.category_products,
-      status: form.status,
+      statusProduct: form.status,
     };
 
     setSaving(true);
