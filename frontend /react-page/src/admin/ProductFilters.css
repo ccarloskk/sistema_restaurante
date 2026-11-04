@@ -1,0 +1,41 @@
+.admin-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-toolbar .category-tabs {
+  gap: 6px;
+}
+
+.admin-toolbar .search-box {
+  flex: 0 0 min(245px, 40%);
+}
+
+@media (max-width: 680px) {
+  .admin-toolbar {
+    align-items: stretch;
+    flex-direction: column-reverse;
+    gap: 10px;
+    padding-bottom: 10px;
+  }
+
+  .admin-toolbar .search-box {
+    width: 100%;
+    flex-basis: auto;
+    margin: 0;
+  }
+
+  .admin-toolbar .category-tabs {
+    gap: 4px;
+  }
+
+  .admin-toolbar .category-tabs button {
+    min-height: 34px;
+    padding: 0 8px;
+    font-size: 10px;
+  }
+}

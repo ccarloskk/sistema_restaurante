@@ -5,7 +5,17 @@ import {
   criarProduto,
   excluirProduto,
 } from "../admin/products";
-import { categories, formatPrice } from "../data/menu";
+import { categories } from "../data/menu";
+import ProductFilters from "./ProductFilters";
+import ProductForm from "./ProductForm";
+import ProductList from "./ProductList";
+import ProductSummary from "./ProductSummary";
+import {
+  getProductCategory,
+  getProductDescription,
+  getProductName,
+  getProductPrice,
+} from "./productUtils";
 import "./AdminPage.css";
 
 const productCategories = categories.filter((category) => category !== "Todos");
@@ -16,22 +26,6 @@ const emptyForm = {
   category_products: productCategories[0] ?? "",
   status: true,
 };
-
-function getProductName(product) {
-  return product.name_product ?? product.name ?? "";
-}
-
-function getProductDescription(product) {
-  return product.description_product ?? product.description ?? "";
-}
-
-function getProductPrice(product) {
-  return Number(product.price_product ?? product.price);
-}
-
-function getProductCategory(product) {
-  return product.category_products ?? product.category ?? "";
-}
 
 async function fetchProducts() {
   const result = await buscarProdutos();
@@ -55,7 +49,7 @@ function AdminPage() {
   useEffect(() => {
     let isMounted = true;
 
-    async function load() {
+    async function loadProducts() {
       try {
         const result = await fetchProducts();
         if (isMounted) {
@@ -75,7 +69,7 @@ function AdminPage() {
       }
     }
 
-    load();
+    loadProducts();
     return () => {
       isMounted = false;
     };
@@ -98,6 +92,10 @@ function AdminPage() {
     setIsFormOpen(false);
     setEditingProduct(null);
     setForm(emptyForm);
+  };
+
+  const updateFormField = (field, value) => {
+    setForm((currentForm) => ({ ...currentForm, [field]: value }));
   };
 
   const startEditing = (product) => {
@@ -183,8 +181,10 @@ function AdminPage() {
     setError("");
     try {
       await excluirProduto(productId);
-      setProducts((current) =>
-        current.filter((item) => (item.idProduct ?? item.id) !== productId),
+      setProducts((currentProducts) =>
+        currentProducts.filter(
+          (item) => (item.idProduct ?? item.id) !== productId,
+        ),
       );
     } catch (deleteError) {
       setError(
@@ -237,51 +237,18 @@ function AdminPage() {
         </div>
       </div>
 
-      <div className="admin-summary" aria-label="Resumo dos produtos">
-        <div className="admin-summary-card">
-          <span className="admin-summary-icon" aria-hidden="true">
-            ▤
-          </span>
-          <div>
-            <span>Produtos cadastrados</span>
-            <strong>{products.length}</strong>
-          </div>
-        </div>
-        <div className="admin-summary-card">
-          <span className="admin-summary-icon" aria-hidden="true">
-            ◈
-          </span>
-          <div>
-            <span>Categorias no cardápio</span>
-            <strong>{productCategories.length}</strong>
-          </div>
-        </div>
-      </div>
+      <ProductSummary
+        productCount={products.length}
+        categoryCount={productCategories.length}
+      />
 
-      <div className="admin-toolbar">
-        <div className="category-tabs" aria-label="Filtrar por categoria">
-          {["Todos", ...productCategories].map((item) => (
-            <button
-              key={item}
-              className={category === item ? "selected" : ""}
-              aria-pressed={category === item}
-              onClick={() => setCategory(item)}
-            >
-              {item}
-            </button>
-          ))}
-        </div>
-        <label className="search-box">
-          <span aria-hidden="true">⌕</span>
-          <input
-            type="search"
-            aria-label="Buscar produtos"
-            value={search}
-            onChange={(event) => setSearch(event.target.value)}
-            placeholder="Buscar produto"
-          />
-        </label>
-      </div>
+      <ProductFilters
+        categories={productCategories}
+        selectedCategory={category}
+        onCategoryChange={setCategory}
+        search={search}
+        onSearchChange={setSearch}
+      />
 
       {error && (
         <p className="admin-alert" role="alert">
@@ -289,203 +256,31 @@ function AdminPage() {
         </p>
       )}
 
-      {loading ? (
-        <p className="admin-feedback" role="status">
-          Carregando produtos...
-        </p>
-      ) : filteredProducts.length ? (
-        <div className="admin-product-list">
-          {filteredProducts.map((product) => {
-            const productId = product.idProduct ?? product.id;
-            return (
-              <article className="admin-product-card" key={productId}>
-                <div className="admin-product-info">
-                  <div className="admin-product-meta">
-                    <span className="admin-product-category">
-                      {getProductCategory(product)}
-                    </span>
-                    <span
-                      className={`admin-product-status ${
-                        product.status === false ? "inactive" : "active"
-                      }`}
-                    >
-                      {product.status === false ? "Inativo" : "Ativo"}
-                    </span>
-                  </div>
-                  <h2>{getProductName(product)}</h2>
-                  <p>{getProductDescription(product) || "Sem descrição."}</p>
-                </div>
-                <strong className="admin-product-price">
-                  {formatPrice(getProductPrice(product))}
-                </strong>
-                <div className="admin-product-actions">
-                  <button
-                    className="admin-edit-button"
-                    onClick={() => startEditing(product)}
-                    disabled={saving}
-                  >
-                    Editar
-                  </button>
-                  <button
-                    className="admin-delete-button"
-                    onClick={() => handleDelete(product)}
-                    disabled={saving}
-                  >
-                    Excluir
-                  </button>
-                </div>
-              </article>
-            );
-          })}
-        </div>
-      ) : (
-        <div className="empty-state admin-empty-state">
-          <span aria-hidden="true">◌</span>
-          <h3>Nenhum produto encontrado</h3>
-          <p>
-            {products.length
-              ? "Tente outra busca ou categoria."
-              : "Cadastre o primeiro produto para começar."}
-          </p>
-          {search || category !== "Todos" ? (
-            <button
-              className="secondary-button"
-              onClick={() => {
-                setSearch("");
-                setCategory("Todos");
-              }}
-            >
-              Limpar filtros
-            </button>
-          ) : null}
-        </div>
-      )}
+      <ProductList
+        loading={loading}
+        products={filteredProducts}
+        totalProducts={products.length}
+        hasFilters={Boolean(search || category !== "Todos")}
+        saving={saving}
+        onEdit={startEditing}
+        onDelete={handleDelete}
+        onClearFilters={() => {
+          setSearch("");
+          setCategory("Todos");
+        }}
+      />
 
-      {isFormOpen ? (
-        <div
-          className="admin-modal-backdrop"
-          role="presentation"
-          onMouseDown={(event) => {
-            if (event.target === event.currentTarget && !saving) closeForm();
-          }}
-        >
-          <section
-            className="admin-modal"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="admin-form-title"
-          >
-            <div className="admin-modal-heading">
-              <div>
-                <p className="eyebrow">
-                  {editingProduct ? "Atualização do cardápio" : "Novo cadastro"}
-                </p>
-                <h2 id="admin-form-title">
-                  {editingProduct ? "Editar produto" : "Novo produto"}
-                </h2>
-              </div>
-              <button
-                type="button"
-                className="admin-modal-close"
-                aria-label="Fechar formulário"
-                onClick={closeForm}
-                disabled={saving}
-              >
-                ×
-              </button>
-            </div>
-            <form className="admin-form" onSubmit={handleSubmit}>
-              <label>
-                Nome do produto
-                <input
-                  required
-                  maxLength={120}
-                  value={form.name_product}
-                  onChange={(event) =>
-                    setForm({ ...form, name_product: event.target.value })
-                  }
-                  autoFocus
-                />
-              </label>
-              <label>
-                Descrição
-                <textarea
-                  maxLength={500}
-                  rows={4}
-                  value={form.description_product}
-                  onChange={(event) =>
-                    setForm({
-                      ...form,
-                      description_product: event.target.value,
-                    })
-                  }
-                />
-              </label>
-              <div className="admin-form-row">
-                <label>
-                  Preço (R$)
-                  <input
-                    required
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    value={form.price_product}
-                    onChange={(event) =>
-                      setForm({ ...form, price_product: event.target.value })
-                    }
-                  />
-                </label>
-                <label>
-                  Categoria
-                  <select
-                    required
-                    value={form.category_products}
-                    onChange={(event) =>
-                      setForm({
-                        ...form,
-                        category_products: event.target.value,
-                      })
-                    }
-                  >
-                    {productCategories.map((item) => (
-                      <option key={item} value={item}>
-                        {item}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-              <label className="admin-status-field">
-                <input
-                  type="checkbox"
-                  checked={form.status}
-                  onChange={(event) =>
-                    setForm({ ...form, status: event.target.checked })
-                  }
-                />
-                Produto ativo no cardápio
-              </label>
-              <div className="admin-form-actions">
-                <button
-                  type="button"
-                  className="secondary-button"
-                  onClick={closeForm}
-                  disabled={saving}
-                >
-                  Cancelar
-                </button>
-                <button
-                  type="submit"
-                  className="primary-button"
-                  disabled={saving}
-                >
-                  {saving ? "Salvando..." : "Salvar produto"}
-                </button>
-              </div>
-            </form>
-          </section>
-        </div>
-      ) : null}
+      {isFormOpen && (
+        <ProductForm
+          form={form}
+          isEditing={Boolean(editingProduct)}
+          saving={saving}
+          categories={productCategories}
+          onChange={updateFormField}
+          onSubmit={handleSubmit}
+          onClose={closeForm}
+        />
+      )}
     </section>
   );
 }
