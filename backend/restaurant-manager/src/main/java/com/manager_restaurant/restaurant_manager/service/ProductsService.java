@@ -22,7 +22,7 @@ public class ProductsService {
     }
 
     public List<ProductsDTO> getAllProducts() {
-        return productsRepository.findAll().stream()
+        return productsRepository.findAllByOrderByName_productAsc().stream()
                 .map(product -> new ProductsDTO(
                         product.getIdProduct(),
                         product.getName_product(),
@@ -35,7 +35,7 @@ public class ProductsService {
     }
 
     public List<ProductsDTO> getActiveProducts() {
-        return productsRepository.findByStatusTrue().stream()
+        return productsRepository.findByStatusTrueOrderByName_productAsc().stream()
                 .map(product -> new ProductsDTO(
                         product.getIdProduct(),
                         product.getName_product(),

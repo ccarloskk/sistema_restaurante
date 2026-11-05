@@ -12,4 +12,8 @@ import java.util.Optional;
 @Repository
 public interface ProductsRepository extends JpaRepository<Products, Long> {
     List<Products> findByStatusTrue();
+
+    List<Products> findAllByOrderByName_productAsc();
+
+    List<Products> findByStatusTrueOrderByName_productAsc();
 }
