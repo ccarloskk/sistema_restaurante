@@ -148,7 +148,11 @@
   }
 
   .admin-product-info p {
-    font-size: 11px;
+    font-size: 13px;
+  }
+
+  .admin-product-category {
+    font-size: 12px;
   }
 
   .admin-product-price {
