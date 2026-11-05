@@ -13,7 +13,9 @@ import java.util.Optional;
 public interface ProductsRepository extends JpaRepository<Products, Long> {
     List<Products> findByStatusTrue();
 
-    List<Products> findAllByOrderByName_productAsc();
+    @Query("SELECT p FROM Products p ORDER BY p.name_product ASC")
+    List<Products> findAllOrderByName();
 
-    List<Products> findByStatusTrueOrderByName_productAsc();
+    @Query("SELECT p FROM Products p WHERE p.status = true ORDER BY p.name_product ASC")
+    List<Products> findActiveOrderByName();
 }

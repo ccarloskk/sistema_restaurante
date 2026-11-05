@@ -4,7 +4,6 @@ import com.manager_restaurant.restaurant_manager.dto.ProductsDTO;
 import com.manager_restaurant.restaurant_manager.model.Products;
 import com.manager_restaurant.restaurant_manager.repository.ProductsRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -22,7 +21,7 @@ public class ProductsService {
     }
 
     public List<ProductsDTO> getAllProducts() {
-        return productsRepository.findAllByOrderByName_productAsc().stream()
+        return productsRepository.findAllOrderByName().stream()
                 .map(product -> new ProductsDTO(
                         product.getIdProduct(),
                         product.getName_product(),
@@ -35,7 +34,7 @@ public class ProductsService {
     }
 
     public List<ProductsDTO> getActiveProducts() {
-        return productsRepository.findByStatusTrueOrderByName_productAsc().stream()
+        return productsRepository.findActiveOrderByName().stream()
                 .map(product -> new ProductsDTO(
                         product.getIdProduct(),
                         product.getName_product(),
