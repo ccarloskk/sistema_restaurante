@@ -38,19 +38,19 @@ public class SecurityConfiguration {
 
                         .requestMatchers("/error").permitAll()
 
-                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/auth/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/users/me").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/auth/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
+//                        .requestMatchers(HttpMethod.POST, "/auth/register").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.GET, "/auth/**").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.GET, "/users/me").authenticated()
+//                        .requestMatchers(HttpMethod.PUT, "/auth/**").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.DELETE, "/auth/**").hasRole("ADMIN")
 
                         .requestMatchers(HttpMethod.GET, "/products/admin/menu").permitAll()
                         .requestMatchers(HttpMethod.GET, "/products/menu").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/products/{idProduct}").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/products/**").permitAll()
-                        .requestMatchers(HttpMethod.PUT, "/products/update/{idProduct}").permitAll()
-                        .requestMatchers(HttpMethod.DELETE, "/products/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/products/admin/{idProduct}").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/products/admin/create").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/products/admin/update/{idProduct}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/products/admin/delete/{idProduct}").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/orders/details/{id_order}").permitAll()
                         .requestMatchers(HttpMethod.GET, "/orders/details").permitAll()
@@ -76,7 +76,8 @@ public class SecurityConfiguration {
                 "https://estacaoparaense.com.br",
                 "https://www.estacaoparaense.com.br",
                 "http://localhost:5173",
-                "http://localhost:3000"
+                "http://localhost:3000",
+                "http://localhost:8080"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));

@@ -21,8 +21,17 @@ public class ProductsService {
                 .orElseThrow(() -> new RuntimeException("Produto não encontrado ou inativo"));
     }
 
-    public List<Products> getAllProducts() {
-        return productsRepository.findAll();
+    public List<ProductsDTO> getAllProducts() {
+        return productsRepository.findAll().stream()
+                .map(product -> new ProductsDTO(
+                        product.getIdProduct(),
+                        product.getName_product(),
+                        product.getDescription_product(),
+                        product.getStatus(),
+                        product.getCategory_products(),
+                        product.getPrice_product()
+                ))
+                .toList();
     }
 
     public List<ProductsDTO> getActiveProducts() {

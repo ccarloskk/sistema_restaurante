@@ -18,8 +18,8 @@ public class ProductsController {
         this.productsService = productsService;
     }
 
-    @GetMapping("/menu/admin")
-    public List<Products> getAdminMenu() {
+    @GetMapping("/admin/menu")
+    public List<ProductsDTO> getAdminMenu() {
         return productsService.getAllProducts();
     }
 
@@ -33,17 +33,17 @@ public class ProductsController {
         return productsService.searchProductId(idProduct);
     }
 
-    @PostMapping("/create")
+    @PostMapping("/admin/create")
     public ProductsDTO createProduct(@RequestBody ProductsDTO product){
         return productsService.createProduct(product);
     }
 
-    @PutMapping("/update/{idProduct}")
+    @PutMapping("/admin/update/{idProduct}")
     public ProductsDTO updateProduct(@PathVariable Long idProduct, @RequestBody ProductsDTO productsDTO){
         return productsService.updateProduct(idProduct, productsDTO);
     }
 
-    @DeleteMapping("/delete/{idProduct}")
+    @DeleteMapping("/admin/delete/{idProduct}")
     public void deleteProduct(@PathVariable Long idProduct){
         productsService.deleteProduct(idProduct);
     }
