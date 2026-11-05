@@ -1,9 +1,17 @@
 .admin-page {
-  min-height: 65vh;
-  padding-top: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 clamp(24px, 9vw, 136px) 32px;
 }
 
 .admin-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 4;
   display: flex;
   min-height: 76px;
   align-items: center;
@@ -12,7 +20,7 @@
   margin: 0 calc(-1 * clamp(24px, 9vw, 136px)) 45px;
   padding: 12px clamp(24px, 9vw, 136px);
   border-bottom: 1px solid var(--line);
-  background: rgb(255 253 247 / 90%);
+  background: rgb(255 253 247 / 96%);
 }
 
 .admin-brand {
@@ -89,14 +97,15 @@
 
 @media (max-width: 680px) {
   .admin-page {
-    padding-top: 45px;
+    padding-right: 20px;
+    padding-left: 20px;
   }
 
   .admin-topbar {
     align-items: flex-start;
     flex-direction: column;
     gap: 15px;
-    margin-bottom: 32px;
+    margin: 0 -20px 32px;
     padding: 15px 20px;
   }
 
@@ -115,5 +124,11 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 18px;
+  }
+
+  .admin-page input:not([type="checkbox"]),
+  .admin-page textarea,
+  .admin-page select {
+    font-size: 16px;
   }
 }

@@ -80,7 +80,7 @@ function HomePage({ items, isMenuLoading, menuError, onNavigate, onAdd }) {
         <div className="feature-item">
           <div>
             <strong>Avaliação 5,0 no Google</strong>
-            <span>Com base em 2 avaliações</span>
+            <span>Com base em 6 avaliações</span>
           </div>
         </div>
         <div className="feature-item">
