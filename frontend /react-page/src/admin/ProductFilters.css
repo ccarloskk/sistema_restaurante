@@ -35,7 +35,7 @@
 
   .admin-toolbar .category-tabs button {
     min-height: 34px;
-    padding: 0 8px;
-    font-size: 10px;
+    padding: 0 5px;
+    font-size: 13px;
   }
 }
